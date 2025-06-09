@@ -1,0 +1,2 @@
+ReWriteEngine on
+RewriteRule ^[\/]*([a-zA-Z0-9\.\_]+).(html|php) index.php?x=$1 [L,QSA]
