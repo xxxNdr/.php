@@ -10,8 +10,8 @@ if (!empty($_POST)) {
             $riepilogo .= $piatti[$v] . '..........€' . $prezzi[$v] . '<br>';
             $totale += $prezzi[$v];
         }
-    }
-    $riepilogo .= 'Totale: ..........' . '<strong>€' . $totale . '</strong>';
+    }    
+    $riepilogo .= '<strong>Totale: ..........' . '€' . $totale . '</strong>';
 }
 
 $pagine = array(
