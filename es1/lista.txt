@@ -1,0 +1,1 @@
+a:7:{i:0;a:1:{s:8:"prodotto";s:3:"gas";}i:1;a:1:{s:8:"prodotto";s:5:"acqua";}i:2;a:1:{s:8:"prodotto";s:4:"pane";}i:3;a:1:{s:8:"prodotto";s:5:"miele";}i:4;a:1:{s:8:"prodotto";s:9:"affettato";}i:5;a:1:{s:8:"prodotto";s:7:"calcare";}i:6;a:1:{s:8:"prodotto";s:19:"sapone di marsiglia";}}
