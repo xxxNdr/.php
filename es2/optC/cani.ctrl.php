@@ -2,8 +2,10 @@
 
 $azione = $_REQUEST['azione'] ?? '';
 
-error_log("Azione ricevuta: " . ($azione ?? 'nessuna'));
-error_log("Dati ricevuti: " . print_r($_REQUEST, true));
+var_dump($azione);
+print("<br>");
+var_dump($_REQUEST);
+
 
 $id = $_REQUEST['id'] ?? null;
 $nome = $_REQUEST['nome'] ?? null;
