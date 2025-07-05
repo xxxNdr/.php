@@ -1,9 +1,12 @@
 <?php
 
-error_log("Azione ricevuta: " . ($azione ?? 'nessuna'));
-error_log("Dati ricevuti: " . print_r($_REQUEST, true));
-
 $azione = $_REQUEST['azione'] ?? '';
+
+var_dump($azione);
+print("<br>");
+var_dump($_REQUEST);
+
+
 $id = $_REQUEST['id'] ?? null;
 $cognome = $_REQUEST['nome'] ?? null;
 $telefono = $_REQUEST['telefono'] ?? null;
