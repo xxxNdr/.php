@@ -20,3 +20,11 @@ CREATE TABLE cani (
         ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+select * 
+from cani;
+
+select *
+from padroni;
+
+
+SHOW TABLE STATUS FROM cani;

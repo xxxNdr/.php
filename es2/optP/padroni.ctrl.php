@@ -1,14 +1,10 @@
 <?php
 
+
 $azione = $_REQUEST['azione'] ?? '';
 
-var_dump($azione);
-print("<br>");
-var_dump($_REQUEST);
-
-
 $id = $_REQUEST['id'] ?? null;
-$cognome = $_REQUEST['nome'] ?? null;
+$cognome = $_REQUEST['cognome'] ?? null;
 $telefono = $_REQUEST['telefono'] ?? null;
 $output = $x['contenuto']['footer'] ?? null;
 
@@ -19,6 +15,8 @@ switch ($azione) {
             $output = $s ? "<p>Aggiunta di $cognome con $telefono</p>"
                 : "<p>Errore nell'ultima aggiunta</p>";
         }
+        // Aggiorna la tabella dopo l'aggiunta
+        $x['contenuto']['main'] = padroni\lista();
         break;
 
     case 'modifica':
@@ -35,6 +33,8 @@ switch ($azione) {
                 $output = "<p>Errore nel recupero dei dati di $id</p>";
             }
         }
+        // Aggiorna la tabella dopo la modifica
+        $x['contenuto']['main'] = padroni\lista();
         break;
 
     case 'elimina':
@@ -42,5 +42,9 @@ switch ($azione) {
             $s = padroni\elimina($id);
             $output = $s ? "<p>Eliminazione di $id riuscita</p>" : "<p>Errore nell'ultima eliminazione</p>";
         }
+        // Aggiorna la tabella dopo l'eliminazione
+        $x['contenuto']['main'] = padroni\lista();
         break;
 }
+
+$x['contenuto']['footer'] = $output;

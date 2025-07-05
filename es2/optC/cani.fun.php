@@ -5,7 +5,7 @@ namespace cani;
 function lista(): array
 {
     $conn = \db\connetti();
-    $res = mysqli_query($conn, "select * from cani");
+    $res = mysqli_query($conn, "select *, p.cognome from cani c join padroni p on c.id_padrone = p.id ");
     $dati = $res ? mysqli_fetch_all($res, MYSQLI_ASSOC) : [];
     return $dati;
 }
@@ -86,7 +86,7 @@ function elimina(int $id): bool
     return $res !== false;
 };
 
-function dettagli(int $id): array
+function dettagli_test(int $id): array
 {
     if ($id <= 0) {
         return [];
@@ -105,5 +105,16 @@ function dettagli(int $id): array
         return $row !== null ? $row : [];
     } else {
         return [];
+    }
+}
+
+function dettagli($id){
+    if(!empty($id)){
+        $query = "select * from cani where id = $id";
+        $risultato_query = mysqli_query(\db\connetti(), $query);
+        return mysqli_fetch_assoc($risultato_query);
+    }else{
+        echo "Errore in dettagli";
+        return false;
     }
 }

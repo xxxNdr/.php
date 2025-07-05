@@ -1,18 +1,14 @@
 <?php
 
+
 $azione = $_REQUEST['azione'] ?? '';
 
-var_dump($azione);
-print("<br>");
-var_dump($_REQUEST);
-
-
-$id = $_REQUEST['id'] ?? null;
-$nome = $_REQUEST['nome'] ?? null;
-$dataNascita = $_REQUEST['data_nascita'] ?? null;
-$dataVaccinazione = $_REQUEST['data_vaccinazione'] ?? null;
-$id_padrone = $_REQUEST['id_padrone'] ?? null;
-$output = $x['contenuto']['footer'] ?? null;
+$id = $_REQUEST['id'] ?? '';
+$nome = $_REQUEST['nome'] ?? '';
+$dataNascita = $_REQUEST['data_nascita'] ?? '';
+$dataVaccinazione = $_REQUEST['data_vaccinazione'] ?? '';
+$id_padrone = $_REQUEST['id_padrone'] ?? '';
+$output = $x['contenuto']['footer'] ?? '';
 
 switch ($azione) {
     case 'aggiungi':
@@ -21,6 +17,7 @@ switch ($azione) {
             $output = $s ? "<p>Aggiunta di $nome nato il $dataNascita con ultima vaccinazione $dataVaccinazione</p>"
                 : "<p>Errore nell'ultima aggiunta</p>";
         }
+        $x['contenuto']['main'] = cani\lista();
         break;
 
     case 'modifica':
@@ -31,12 +28,14 @@ switch ($azione) {
 
         if ($id) {
             $cane = cani\dettagli($id);
+            // var_dump(cani\dettagli($id));
             if (!empty($cane)) {
                 $_REQUEST = array_merge($_REQUEST, $cane);
             } else {
                 $output = "<p>Errore nel recupero dei dati di $id</p>";
             }
         }
+        $x['contenuto']['main'] = cani\lista();
         break;
 
     case 'elimina':
@@ -44,7 +43,9 @@ switch ($azione) {
             $s = cani\elimina($id);
             $output = $s ? "<p>Eliminazione di $id riuscita</p>" : "<p>Errore nell'ultima eliminazione</p>";
         }
+        $x['contenuto']['main'] = cani\lista();
         break;
 }
 
 $x['contenuto']['footer'] = $output;
+

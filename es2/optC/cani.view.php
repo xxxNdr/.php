@@ -10,6 +10,7 @@ foreach (cani\lista() as $cane) {
             'nome' => $cane['nome'],
             'data_nascita' => $cane['data_nascita'],
             'data_vaccinazione' => $cane['data_vaccinazione'],
+            'cognome_padrone' => $cane['cognome'],
         ]
     );
 }
@@ -23,7 +24,7 @@ $lista = render\r(
 
 $padroni = \padroni\lista();
 $opzioni = '';
-$idPadroneSelezionato = $_REQUEST['id_padrone'] ?? ($_REQUEST['id_padrone'] ?? '');
+$idPadroneSelezionato = $_REQUEST['id_padrone'] ?? '';
 
 foreach($padroni as $padrone){
     $selected = ($padrone['id'] == $idPadroneSelezionato) ? 'selected' : '';
