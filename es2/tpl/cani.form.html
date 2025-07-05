@@ -1,0 +1,26 @@
+<form action="listaCani.html" method="post">
+  <input type="hidden" name="azione" value="{{azione}}" />
+  <input type="hidden" name="id" value="{{id}}" />
+  <label for="nome">Nome</label>
+  <input type="text" name="nome" value="{{nome}}" id="nome" />
+  <label for="data_nascita">Data di nascita</label>
+  <input
+    type="date"
+    name="data_nascita"
+    value="{{data_nascita}}"
+    id="data_nascita"
+  />
+  <label for="data_vaccinazione">Data di vaccinazione</label>
+  <input
+    type="month"
+    name="data_vaccinazione"
+    value="{{data_vaccinazione}}"
+    id="data_vaccinazione"
+  />
+  <label for="id_padrone">Padrone</label>
+  <select name="id_padrone" id="id_padrone">
+    <option value="">--Seleziona padrone</option>
+    {{opzioni_padroni}}
+  </select>
+  <input type="submit" value="Invia" />
+</form>
