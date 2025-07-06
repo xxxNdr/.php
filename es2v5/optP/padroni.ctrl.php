@@ -41,4 +41,4 @@ switch ($azione) {
         break;
 }
 
-$x['contenuto']['footer'] = $output;
+echo $output;
