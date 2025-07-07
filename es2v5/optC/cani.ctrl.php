@@ -43,5 +43,5 @@ switch ($azione) {
         break;
 }
 
-echo $output;
+$output;
 
