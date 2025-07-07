@@ -3,11 +3,11 @@
 
 $azione = $_REQUEST['azione'] ?? '';
 
-$idc = $_REQUEST['idc'] ?? '';
-$nome = $_REQUEST['nome'] ?? '';
-$dataNascita = $_REQUEST['data_nascita'] ?? '';
-$dataVaccinazione = $_REQUEST['data_vaccinazione'] ?? '';
-$id_padrone = $_REQUEST['id_padrone'] ?? '';
+$idc = $_REQUEST['idc'] ?? null;
+$nome = $_REQUEST['nome'] ?? null;
+$dataNascita = $_REQUEST['data_nascita'] ?? null;
+$dataVaccinazione = $_REQUEST['data_vaccinazione'] ?? null;
+$id_padrone = $_REQUEST['id_padrone'] ?? null;
 $output = $x['contenuto']['footer'] ?? '';
 
 switch ($azione) {
