@@ -41,8 +41,6 @@ function aggiungi(string $nome, string $datan, string $datav, int $id_padrone): 
         $datavEsc = mysqli_real_escape_string($conn, $dataCompleta);
         $idPadroneEsc = (int)$id_padrone;
 
-        
-
         $query = "insert into cani (nome, data_nascita, data_vaccinazione, id_padrone) values ('$nomeEsc', '$datanEsc',
         '$datavEsc', '$idPadroneEsc')";
         return mysqli_query($conn, $query);
