@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 
 $azione = $_REQUEST['azione'] ?? '';
