@@ -30,14 +30,18 @@ function aggiungi(string $nome, string $datan, string $datav, int $id_padrone): 
         if (!$conn) {
             return false;
         }
-        $nomeEsc = mysqli_real_escape_string($conn, trim($nome));
-        $datanEsc = mysqli_real_escape_string($conn, trim($datan));
-        $datavEsc = mysqli_real_escape_string($conn, trim($datav) . '-01');
-        $idPadroneEsc = (int)$id_padrone;
-
-        if (!valida($datan) || !valida($datavEsc)) {
+        $dataCompleta = trim($datav) . '-01';
+        
+        if (!valida($datan) || !valida($dataCompleta)) {
             return false;
         }
+
+        $nomeEsc = mysqli_real_escape_string($conn, trim($nome));
+        $datanEsc = mysqli_real_escape_string($conn, trim($datan));
+        $datavEsc = mysqli_real_escape_string($conn, $dataCompleta);
+        $idPadroneEsc = (int)$id_padrone;
+
+        
 
         $query = "insert into cani (nome, data_nascita, data_vaccinazione, id_padrone) values ('$nomeEsc', '$datanEsc',
         '$datavEsc', '$idPadroneEsc')";
@@ -57,14 +61,16 @@ function modifica(int $idc, string $nome, string $datan, string $datav, $id_padr
         return false;
     }
 
+    $dataCompleta = trim($datav) . '-01';
+        
+        if (!valida($datan) || !valida($dataCompleta)) {
+            return false;
+        }
+
     $nomeEsc = mysqli_real_escape_string($conn, trim($nome));
     $datanEsc = mysqli_real_escape_string($conn, trim($datan));
-    $datavEsc = mysqli_real_escape_string($conn, trim($datav) . '-01');
+    $datavEsc = mysqli_real_escape_string($conn, $dataCompleta);
     $idPadroneEsc = (int)$id_padrone;
-
-    if (!valida($datan) || !valida($datavEsc)) {
-        return false;
-    }
 
     $query = "update cani set nome = '$nomeEsc', data_nascita = '$datanEsc', data_vaccinazione = '$datavEsc',
         id_padrone = $idPadroneEsc where idc = $idc";
