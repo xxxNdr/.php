@@ -1,106 +1,98 @@
-<?php
-
-/*Scrivere un programma che accetti in input il nome di un gruppo musicale e un anno compreso fra il 1960 e il 2000,
+<!-- Scrivere un programma che accetti in input il nome di un gruppo musicale e un anno compreso fra il 1960 e il 2000,
 e scriva tutti gli album e i singoli pubblicati da quel gruppo in quell'anno (prendere i dati da Wikipedia).
-Cambiare tramite CSS il colore di sfondo della pagina e il colore e il font utilizzati per il testo.*/
+Cambiare tramite CSS il colore di sfondo della pagina e il colore e il font utilizzati per il testo. -->
 
-$data = $_POST['data'];
-$gruppo = $_POST['gruppo'];
-
-$anno = date()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<?php
-// Array con tutti i dati
-$discografia = [
-    'Beatles' => [
-        1965 => ['Rubber Soul', 'Help!', 'Yesterday (singolo)'],
-        1966 => ['Revolver', 'Yellow Submarine (singolo)'],
-        1967 => ['Sgt. Pepper\'s Lonely Hearts Club Band', 'All You Need Is Love (singolo)'],
-        1969 => ['Abbey Road', 'Come Together (singolo)']
-    ],
-    'Rolling Stones' => [
-        1965 => ['Out of Our Heads', 'Satisfaction (singolo)'],
-        1966 => ['Aftermath', 'Paint It Black (singolo)'],
-        1969 => ['Let It Bleed', 'Honky Tonk Women (singolo)'],
-        1971 => ['Sticky Fingers', 'Brown Sugar (singolo)']
-    ],
-    'Pink Floyd' => [
-        1967 => ['The Piper at the Gates of Dawn'],
-        1973 => ['The Dark Side of the Moon', 'Money (singolo)'],
-        1975 => ['Wish You Were Here', 'Have a Cigar (singolo)'],
-        1979 => ['The Wall', 'Another Brick in the Wall (singolo)']
-    ],
-    'Queen' => [
-        1974 => ['Queen II', 'Seven Seas of Rhye (singolo)'],
-        1975 => ['A Night at the Opera', 'Bohemian Rhapsody (singolo)'],
-        1977 => ['News of the World', 'We Will Rock You (singolo)'],
-        1980 => ['The Game', 'Another One Bites the Dust (singolo)']
-    ]
-];
-
-// Prendi i dati dal form
-$gruppo = $_POST['gruppo'] ?? '';
-$data = $_POST['data'] ?? '';
-
-// Estrai l'anno dalla data
-$anno = date('Y', strtotime($data));
-
-?>
 
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Risultati Ricerca</title>
+    <title>Ricerca Album Musicali</title>
+    <link rel="stylesheet" href="s.css">
 </head>
 
 <body>
-    <h1>Risultati Ricerca</h1>
-    
+    <h1>Ricerca Album Musicali</h1>
+
+    <form action="index.php" method="post">
+        <label for="gruppo">Band</label>
+        <input type="text" id="gruppo" name="gruppo">
+        <label for="data">Anno</label>
+        <input type="number" id="data" name="data" min="1990" max="2025">
+        <input type="submit" value="Cerca Album">
+    </form>
+    <p class="hint">Gruppi disponibili: Blur, Oasis, The Verve</p>
+    <p class="hint">Periodo di tempo su cui fare ricerca: 1990 - 2025</p>
+
+
+
     <?php
-    // Condizione IF sulla data/anno
-    if ($anno >= 1960 && $anno <= 2000) {
-        
-        // Cerca il gruppo nell'array
-        foreach ($discografia as $nomeGruppo => $anni) {
-            if ($nomeGruppo == $gruppo) {
-                
-                // Se trova l'anno, stampa gli album
-                if (isset($anni[$anno])) {
-                    echo "<p>Album di $nomeGruppo nel $anno:</p>";
-                    echo "<ul>";
-                    foreach ($anni[$anno] as $album) {
+
+    $data = (int)($_POST['data'] ?? 0);
+    $gruppo = trim($_POST['gruppo'] ?? '');
+    $anno = $data;
+    $discografia = [
+        'Blur' => [
+            1991 => ['Leisure'],
+            1993 => ['Modern Life Is Rubbish'],
+            1994 => ['Parklife'],
+            1995 => ['The Great Escape'],
+            1997 => ['Blur'],
+            1999 => ['13'],
+            2003 => ['Think Tank'],
+            2015 => ['The Magic Whip'],
+            2023 => ['The Ballad of Darren']
+        ],
+        'Oasis' => [
+            1994 => ['Definitely Maybe'],
+            1995 => ['What\'s the Story) Morning Glory?'],
+            1997 => ['Be Here Now'],
+            2000 => ['Standing on the Shoulder of Giants'],
+            2002 => ['Heathen Chemistry'],
+            2005 => ['Don\'t Believe the Truth'],
+            2008 => ['Dig Out Your Soul'],
+        ],
+        'The Verve' => [
+            1993 => ['A Storm in Heaven'],
+            1995 => ['A Northern Soul'],
+            1997 => ['Urban Hymns'],
+            2008 => ['Forth']
+        ]
+    ];
+
+    if ($anno >= 1990 && $anno <= 2025 && $gruppo !== '' && $_POST) {
+
+        /* $_POST nell'if serve per non produrre errore apena si atterra sulla pagina form perché
+coi campi non compilati diventa vero che data è < 1990 e gruppo è stringa vuota */
+
+        $bandTrovata = false;
+        foreach ($discografia as $k => $v) {
+            if (strcasecmp($k, $gruppo) === 0) {
+
+                /* confronta le stringe $k e $gruppo in modo case-insensitive,
+=== 0 significa che le due stringe sono assolutamente uguali,
+quindi l'utente può scrivere band e gruppo in minuscolo */
+
+                $bandTrovata = true;
+                if (isset($v[$anno])) {
+                    echo '<ul>';
+                    foreach ($v[$anno] as $album) {
                         echo "<li>$album</li>";
                     }
-                    echo "</ul>";
+                    echo '</ul>';
                 } else {
-                    echo "<p>Nessun album trovato per $nomeGruppo nel $anno</p>";
+                    echo "<p>Nessun album trovato per l'anno $anno</p>";
                 }
                 break;
             }
         }
-        
+        if (!$bandTrovata) {
+            echo "<p>Band non trovata</p>";
+        }
     } else {
-        echo "<p>Anno non valido. Inserisci un anno tra 1960 e 2000.</p>";
+        echo "<p>Data inserita non disponibile</p>";
     }
     ?>
-    
-    <a href="javascript:history.back()">Torna indietro</a>
 </body>
+
 </html>
