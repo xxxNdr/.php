@@ -1,8 +1,3 @@
-<!-- Scrivere un programma che accetti in input il nome di un gruppo musicale e un anno compreso fra il 1960 e il 2000,
-e scriva tutti gli album e i singoli pubblicati da quel gruppo in quell'anno (prendere i dati da Wikipedia).
-Cambiare tramite CSS il colore di sfondo della pagina e il colore e il font utilizzati per il testo. -->
-
-
 <!DOCTYPE html>
 <html>
 
