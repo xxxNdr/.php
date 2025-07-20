@@ -9,10 +9,13 @@
     12 = 2 * 2 * 3
     (dove 2 e 3 sono numeri primi) */
 
-//                              FUNZIONE
+//                                FUNZIONE
 
 // La funzione restituisce sempre un array di fattori
 // $numero è il valore inserito dall'utente
+
+//                                  STEP
+
 // #A, Primo divieto: no numeri negativi
 // #B, Creo un array per i fattori primi trovati, i numeri che dividono $numero
 // #C, Unico caso in cui 1 non ha fattori primi
@@ -21,10 +24,10 @@
 // #F, Aggiorno $numero a fine ciclo, $numero = $numero / 2
 /* #G, Dividi per tre e per step di 2 tutti i numeri primi che seguono, 3+2, 5+2, 7+2...
 
-        $d * $d (ottimizzazione) sta a significare: cerca fino al punto dove il divisore moltiplicato 
+        $d * $d <= $numero (ottimizzazione) sta a significare: cerca fino al punto dove il divisore moltiplicato 
         per se stesso non supera il numero, non serve cercarli tutti.
         
-        Esempio senza ottimizzazione:
+        Esempio di 100 senza ottimizzazione:
         // Questo controllerebbe TUTTI i numeri da 3 a 99!
 
         for ($d = 3; $d < $numero; $d += 2) {
@@ -32,7 +35,7 @@
         // = 49 controlli inutili!
         }
 
-        Esempio con ottimizzazione:
+        Esempio di 100 con ottimizzazione:
         // Questo si ferma a 10 (perché 10×10 = 100)
 
         for ($d = 3; $d * $d <= $numero; $d += 2) {
