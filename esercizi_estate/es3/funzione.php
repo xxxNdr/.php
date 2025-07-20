@@ -75,7 +75,7 @@ function primi($numero)
     return $fattori;    #L
 }
 
-/************RECAP CORE ALGORITMO*******************
+/************RECAP ALGORITMO CON ESEMPIO*******************
 
 $numero = 15;
 $fattori = [];
