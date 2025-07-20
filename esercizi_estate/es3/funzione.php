@@ -24,24 +24,22 @@
 // #F, Aggiorno $numero a fine ciclo, $numero = $numero / 2
 /* #G, Dividi per tre e per step di 2 tutti i numeri primi che seguono, 3+2, 5+2, 7+2...
 
-        $d * $d <= $numero (ottimizzazione) sta a significare: cerca fino al punto dove il divisore moltiplicato 
-        per se stesso non supera il numero, non serve cercarli tutti.
-        
-        Esempio di 100 senza ottimizzazione:
-        // Questo controllerebbe TUTTI i numeri da 3 a 99!
-
-        for ($d = 3; $d < $numero; $d += 2) {
-        // 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55, 57, 59, 61, 63, 65, 67, 69, 71, 73, 75, 77, 79, 81, 83, 85, 87, 89, 91, 93, 95, 97, 99
-        // = 49 controlli inutili!
-        }
-
-        Esempio di 100 con ottimizzazione:
-        // Questo si ferma a 10 (perché 10×10 = 100)
-
-        for ($d = 3; $d * $d <= $numero; $d += 2) {
-        // 3, 5, 7, 9
-        // = solo 4 controlli necessari!
-        }
+    $d * $d <= $numero (ottimizzazione) sta a significare: cerca fino al punto dove il divisore moltiplicato 
+    per se stesso non supera il numero, non serve cercarli tutti.
+    
+    Esempio di 100 senza ottimizzazione:
+    // Questo controllerebbe TUTTI i numeri da 3 a 99!
+    for ($d = 3; $d < $numero; $d += 2) {
+    // 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55,
+    57, 59, 61, 63, 65, 67, 69, 71, 73, 75, 77, 79, 81, 83, 85, 87, 89, 91, 93, 95, 97, 99
+    // = 49 controlli inutili!
+    }
+    Esempio di 100 con ottimizzazione:
+    // Questo si ferma a 10 (perché 10×10 = 100)
+    for ($d = 3; $d * $d <= $numero; $d += 2) {
+    // 3, 5, 7, 9
+    // = solo 4 controlli necessari!
+    }
 
 // #H, Dividere per il divisore corrente finché possibile
 /* #I, Aggiungo il divisore ai fattori
