@@ -1,0 +1,33 @@
+#special {
+  font-size: 150px;
+  white-space: nowrap;
+  animation: slide 10s linear infinite;
+  text-shadow: 1 1 3px #000;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(100vw);
+    opacity: 0;
+  }
+  2% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(-110vw);
+    opacity: 1;
+  }
+  51% {
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(100vw);
+    opacity: 0;
+  }
+}
