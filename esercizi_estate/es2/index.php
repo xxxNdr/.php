@@ -64,8 +64,8 @@ coi campi non compilati diventa vero che data è < 1990 e gruppo è stringa vuot
         foreach ($discografia as $k => $v) {
             if (strcasecmp($k, $gruppo) === 0) {
 
-                /* confronta le stringe $k e $gruppo in modo case-insensitive,
-=== 0 significa che le due stringe sono assolutamente uguali,
+                /* confronta le stringe $k e $gruppo ignorando maiuscole e minuscole,
+strcasecmp restituisce 0 se le stringhebsono uguali(case-insensitive),
 quindi l'utente può scrivere band e gruppo in minuscolo */
 
                 $bandTrovata = true;
