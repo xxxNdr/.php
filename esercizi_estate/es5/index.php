@@ -1,38 +1,40 @@
+
+
 <?php
 
-/*esercizio 05
-Riscrivere il programma precedente in modo che i livelli organizzativi siano cinque (titolare, manager, capo area, capo ufficio, lavoratore)
-e in base al nome del lavoratore inserito dall'utente scrivere tutta la catena di comando che lo collega al titolare.
-Utilizzare una funzione ricorsiva che attraversi l'albero in direzione foglie radice.*/
-
-
+require_once 'lib/render.php';
 
 $flaminiSRL = [
     'ceo' => [
         'nome' => 'Francesca Flamini',
         'dipendenti' => [
-            'direttrice vendite' => [
-                'nome' => 'Giulia Corradini',
+            'manager' => [
+                'nome' => 'Paolo Sartori',
                 'dipendenti' => [
-                    'agente vendite1' => [
-                        'nome' => 'Giordano Corradini'
+                    'direttrice vendite' => [
+                        'nome' => 'Giulia Corradini',
+                        'dipendenti' => [
+                            'agente vendite1' => [
+                                'nome' => 'Giordano Corradini'
+                            ],
+                            'agente vendite2' => [
+                                'nome' => 'Andrea Sartori'
+                            ]
+                        ],
                     ],
-                    'agente vendite2' => [
-                        'nome' => 'Andrea Sartori'
-                    ]
-                ],
-            ],
-            'risorse umane' => [
-                'nome' => 'Elisa Flamini'
-            ],
-            'direttrice marketing' => [
-                'nome' => 'Rosella Caporaletti',
-                'dipendenti' => [
-                    'grafica' => [
-                        'nome' => 'Minni'
+                    'risorse umane' => [
+                        'nome' => 'Elisa Flamini'
                     ],
-                    'stampa' => [
-                        'nome' => 'Franco'
+                    'direttrice marketing' => [
+                        'nome' => 'Rosella Crucianelli',
+                        'dipendenti' => [
+                            'grafica' => [
+                                'nome' => 'Mimmi'
+                            ],
+                            'stampa' => [
+                                'nome' => 'Franco'
+                            ]
+                        ]
                     ]
                 ]
             ]
@@ -40,18 +42,71 @@ $flaminiSRL = [
     ]
 ];
 
-echo '<br>';
-echo '<br>';
+function trova(array $array, string $dipendente)
+{
+    $dipendente = strtolower($dipendente);
+
+    foreach ($array as $k => $v) {
+        foreach ($v['dipendenti'] as $k2 => $v2) {
+            if (isset($v2['dipendenti'])) {
+                foreach ($v2['dipendenti'] as $k3 => $v3) {
+                    if (isset($v3['dipendenti'])) {
+                        foreach ($v3['dipendenti'] as $k4 => $v4) {
+
+                            if (strtolower($v4['nome']) == $dipendente) {
+                                return $v3['nome'];
+                            }
+                        }
+                    }
+                    if (strtolower($v3['nome']) == $dipendente) {
+                        return $v2['nome'];
+                    };
+                }
+            }
+            if (strtolower($v2['nome']) == $dipendente) {
+                return $v['nome'];
+            }
+        }
+        if (strtolower($v['nome']) == $dipendente) {
+            return "{$v['nome']} è il CEO di FLAMINI SRL";
+        }
+    }
+    return null;                // se non viene trovato il dipendente
+};
 
 
+
+
+$dip = [];
 foreach ($flaminiSRL as $k => $v) {
-    echo $v['nome'] . " è il CEO" . '<br>';
+    $dip[] = $v['nome'];
     foreach ($v['dipendenti'] as $k2 => $v2) {
-        echo "Il capo diretto diretto di " . $v2['nome'] . " è " . $v['nome'] . '<br>';
-        if (isset($v2['dipendenti']) && is_array($v2['dipendenti'])) {
+        $dip[] = $v2['nome'];
+        if (isset($v2['dipendenti'])) {
             foreach ($v2['dipendenti'] as $k3 => $v3) {
-                echo "Il capo diretto diretto di " . ($v3['nome'] . " è " . $v2['nome'] . '<br>');
+                $dip[] = $v3['nome'];
+                if (isset($v3['dipendenti'])) {
+                    foreach ($v3['dipendenti'] as $k4 => $v4) {
+                        $dip[] = $v4['nome'];
+                    }
+                }
             }
         }
     }
-};
+}
+
+$listaDip = '';
+foreach($dip as $nome){
+    $listaDip .= "<li>$nome</li>";
+}
+
+echo r\render('form.html', ['dipendenti' => $listaDip]);
+
+if (isset($_POST['nome'])) {
+    $capo = trova($flaminiSRL, $_POST['nome']);
+    if ($capo == null) {
+        ?><div id="msg"><?php echo "Dipendente non trovato";?></div><?php
+    } else {
+        ?><div id="msg"><?php echo "Il capo di {$_POST['nome']} è: $capo";?></div><?php
+    }
+}
