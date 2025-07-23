@@ -34,48 +34,19 @@ $flaminiSRL = [
     ]
 ];
 
-
-// echo '<br>';
-// echo '<br>';
-// var_dump($flaminiSRL['ceo']['dipendenti']['direttrice vendite']['nome']);
-// $direttriceVendite = $flaminiSRL['ceo']['dipendenti']['direttrice vendite']['nome'];
-// echo '<br>';
-// echo '<br>';
-// var_dump($flaminiSRL['ceo']['dipendenti']['direttrice vendite']['dipendenti']['agente vendite1']['nome']);
-// echo '<br>';
-// echo '<br>';
-// var_dump($flaminiSRL['ceo']['dipendenti']['direttrice vendite']['dipendenti']['agente vendite2']['nome']);
-// $agenteVendite1 = $flaminiSRL['ceo']['dipendenti']['direttrice vendite']['dipendenti']['agente vendite1']['nome'];
-// $agenteVendite2 = $flaminiSRL['ceo']['dipendenti']['direttrice vendite']['dipendenti']['agente vendite2']['nome'];
-// echo '<br>';
-// echo '<br>';
-// var_dump($flaminiSRL['ceo']['nome']);
-// $ceo = $flaminiSRL['ceo']['nome'];
-// echo '<br>';
-// echo '<br>';
-// var_dump($flaminiSRL['ceo']['dipendenti']['direttrice vendite']['risorse umane']['nome']);
-// $risorseUmane = $flaminiSRL['ceo']['dipendenti']['direttrice vendite']['risorse umane']['nome'];
-// echo '<br>';
-// echo '<br>';
-// var_dump($flaminiSRL['ceo']['dipendenti']['direttrice vendite']['direttrice marketing']['nome']);
-// $direttriceMarketing = $flaminiSRL['ceo']['dipendenti']['direttrice vendite']['direttrice marketing']['nome'];
-// echo '<br>';
-// echo '<br>';
-
-
 foreach ($flaminiSRL as $k => $v) {
     echo $v['nome'] . " è il CEO" . '<br>';
     foreach (next($v) as $k2 => $v2) {
         echo "Il capo diretto diretto di " . $v2['nome'] . " è " . $v['nome'] . '<br>';
         foreach (next($v2) as $k3 => $v3) {
             echo "Il capo diretto diretto di " . ($v3['nome'] . " è " . $v2['nome'] . '<br>');
-            foreach (next($v2) as $d) {                 // $d può essere array e stringa
+            foreach (next($v2) as $d) {
                 if (is_array($d) && isset($d['nome'])) {
                     echo $d['nome'];
                 } elseif (is_string($d)) {
                     echo "Il capo diretto diretto di " . $d . " è " . $v['nome'] . '<br>';
                 }
-                if (is_array($d)) {                     // is_array previene l'esecuzione del foreach quando una variabile è stringa
+                if (is_array($d)) {
                     foreach ($d as $k => $v) {
                         if (is_string($d)) {
                             echo "Il capo diretto diretto di " . $v['nome'] . " è " . $d['nome'] . '<br>';
@@ -86,6 +57,13 @@ foreach ($flaminiSRL as $k => $v) {
         }
     }
 };
+
+/* next($v) NEL MIO ARRAY SPOSTA IL PUNTATORE DA 'nome' A 'dipendenti'.
+    È COME SE AVESSI SCRITTO $v['dipendenti'].
+    PERO USARE next() PIU VOLTE O DENTRO FOREACH ANNIDATI SENZA RESETTARE IL PUNTATORE COMPORTA
+    CHE IL PUNTATORE POSSA SUPERARE IL LIMITE DELL'ARRAY, COSI RESTITUENDO FALSE
+    O ANCHE STRINGA IN BASE ALLA STRUTTURA DELL'ARRAY.
+    PERCIO SERVONO ALLA FINE I CONTROLLI is_array E is_string. */
 
 echo '<br>';
 echo '<pre>';
