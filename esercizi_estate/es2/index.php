@@ -76,7 +76,15 @@ quindi l'utente può scrivere il nome del gruppo in minuscolo */
                     }
                     echo '</ul>';
                 } else {
-                    echo "<p>Nessun album trovato per l'anno $anno</p>";
+                    echo "<p>Nessun album trovato per l'anno $anno</p><br>";
+                    echo "<p>Ma ti mostro lo stesso la loro discografia: </p>";
+                    echo '<ul>';
+                    foreach ($v as $k2 => $v2) {
+                        foreach ($v2 as $disco) {
+                            echo "<li>$disco ($k2)</li>";
+                        }
+                    }
+                    echo '</ul>';
                 }
                 break;
             }
