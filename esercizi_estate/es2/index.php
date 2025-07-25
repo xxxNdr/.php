@@ -66,7 +66,7 @@ coi campi non compilati diventa vero che data è < 1990 e gruppo è stringa vuot
 
                 /* confronta le stringe $k e $gruppo ignorando maiuscole e minuscole,
 strcasecmp restituisce 0 se le stringhe sono uguali(case-insensitive),
-quindi l'utente può scrivere band e gruppo in minuscolo */
+quindi l'utente può scrivere il nome del gruppo in minuscolo */
 
                 $bandTrovata = true;
                 if (isset($v[$anno])) {
