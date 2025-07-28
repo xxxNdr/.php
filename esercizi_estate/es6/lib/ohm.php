@@ -1,0 +1,27 @@
+<?php
+
+
+function tensione($r, $i)
+{
+    $v = $r * $i;
+    return $v;
+}
+
+function resistenza($v, $i)
+{
+    if ($i == 0) {
+        throw new Exception("Il valore della corrente non può essere zero");
+        // evito divisione per 0
+    }
+    return $v / $i;
+}
+
+function corrente($v, $r)
+{
+    if ($r == 0) {
+        throw new Exception("Il valore della resistenza non può essere zero");
+        // evito divisione per 0
+
+    }
+    return $v / $r;
+}
