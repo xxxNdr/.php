@@ -22,7 +22,7 @@ EOD
     ],
     'calcolo' => [
         'body' => [
-            'titolo' => 'Calcola: corrente, resistenza, tensione'
+            'titolo' => 'Calcola Corrente Resistenza Tensione'
         ],
         'template' => 'tpl/calcolo.html',
         'include' => [

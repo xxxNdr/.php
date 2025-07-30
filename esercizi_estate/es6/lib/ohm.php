@@ -1,5 +1,8 @@
 <?php
 
+// v = tensione in volt
+// r = resistenza in ohm
+// i = corrente in ampere
 
 function tensione($r, $i)
 {

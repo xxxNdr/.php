@@ -1,2 +1,2 @@
 RewriteEngine on
-RewriteRule ^$
+RewriteRule ^([\w.-]+)\.(html|php)$/i index.php?x=$1 [L,QSA]

@@ -1,10 +1,24 @@
+<head>
+    <link rel="stylesheet" href="s.css">
+</head>
 <header>
     {{menu}}
 </header>
 <main>
     <h3>{{titolo}}</h3>
     <form action="index.php" method="post">
-
+        <label for="tensione">Calcola la tensione</label>
+        <input type="number" name="1" placeholder="resistenza" id="tensione">
+        <input type="number" name="2" placeholder="corrente" id="tensione">
+        <input type="submit" value="Calcola">
+        <label for="resistenza">Calcola la resistenza</label>
+        <input type="number" name="3" placeholder="tensione" id="resistenza">
+        <input type="number" name="4" placeholder="corrente" id="resistenza">
+        <input type="submit" value="Calcola">
+        <label for="corrente">Calcola la corrente</label>
+        <input type="number" name="5" placeholder="tensione" id="corrente">
+        <input type="number" name="6" placeholder="resistenza" id="corrente">
+        <input type="submit" value="Calcola">
     </form>
 </main>
 <footer>
