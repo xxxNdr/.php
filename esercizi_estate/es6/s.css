@@ -1,31 +1,24 @@
-body {
+
+body, main, form {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-#h {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+
 p{
     width: 600px;
     text-align: justify;
 }
-#h h1 {
-    margin-top: 0px;
-    margin-bottom: 0px;
+
+#h{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
-ul{
-    padding: unset;
+h1{
+  text-align: center;
+  flex-basis: 100%;
 }

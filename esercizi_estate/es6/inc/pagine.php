@@ -45,7 +45,7 @@ $p = $pagine[$x];
 
 $link = [];
 foreach ($pagine as $k => $v) {
-    $link[] = '<a href="?x=' . $k . '">' . $v['body']['titolo'] . '</a>';
+    $link[] = '<a href="?x=' . htmlspecialchars($k) . '">' . htmlspecialchars($v['body']['titolo']) . '</a>';
 }
 
 $menu = implode(' | ', $link);
