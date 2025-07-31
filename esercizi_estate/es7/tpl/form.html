@@ -1,6 +1,12 @@
+<head>
+    <title>{{titolo}}</title>
+    <link rel="stylesheet" href="s.css">
+</head>
 
-
+<body>
+    <h1>{{titolo}}</h1>
+</body>
 <form action="index.php" method="post">
-    <input type="number" name="distanza" placeholder="distanza tappa">
-    <input type="submit" value="Calcola">
+    <input type="number" name="distanza[]" placeholder="distanza tappa">
+    <input type="submit" value="Aggiungi Tappa">
 </form>
