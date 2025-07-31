@@ -18,7 +18,8 @@ echo render\r(
     [
         'titolo' => $p['body']['titolo'],
         'menu' => $menu,
-        'descrizione' => $p['body']['descrizione'] ?? '',
+        'descrizione' => $descrizione = file_exists($pagine['homepage']['body']['descrizione']) ?
+            file_get_contents($pagine['homepage']['body']['descrizione']) : '',
         'risultato' => $risultato ?? ''
     ]
 );
