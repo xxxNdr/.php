@@ -6,7 +6,7 @@
 </header>
 <main>
     <h3>{{titolo}}</h3>
-    <form action="index.php" method="post">
+    <form action="index.php?x=calcolo" method="post">
         <input type="hidden" name="azione" value="cten">
         <p>Calcola la tensione</p>
         <input type="number" name="resistenza" placeholder="resistenza" min="0.001" step="any">
@@ -14,7 +14,7 @@
         <input type="submit" value="Calcola">
     </form>
 
-    <form action="index.php" method="post">
+    <form action="index.php?x=calcolo" method="post">
         <input type="hidden" name="azione" value="cres">
         <p>Calcola la resistenza</p>
         <input type="number" name="tensione" placeholder="tensione" min="0.001" step="any">
@@ -22,7 +22,7 @@
         <input type="submit" value="Calcola">
     </form>
 
-    <form action="index.php" method="post">
+    <form action="index.php?x=calcolo" method="post">
         <input type="hidden" name="azione" value="ccor">
         <p>Calcola la corrente</p>
         <input type="number" name="tensione" placeholder="tensione" min="0.001" step="any">
@@ -32,5 +32,5 @@
 
 </main>
 <footer>
-    {{descrizione}}
+    {{risultato}}
 </footer>

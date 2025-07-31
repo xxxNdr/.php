@@ -18,6 +18,7 @@ echo render\r(
     [
         'titolo' => $p['body']['titolo'],
         'menu' => $menu,
-        'descrizione' => $p['body']['descrizione'] ?? ''
+        'descrizione' => $p['body']['descrizione'] ?? '',
+        'risultato' => $risultato ?? ''
     ]
 );

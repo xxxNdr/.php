@@ -6,8 +6,8 @@ body, main, form {
 }
 
 p{
-    width: 600px;
     text-align: justify;
+    align-self: center;
 }
 
 #h{
@@ -21,4 +21,13 @@ p{
 h1{
   text-align: center;
   flex-basis: 100%;
+}
+
+form{
+  display: flex;
+  align-items: center;
+}
+
+div{
+  width: 600px;
 }
