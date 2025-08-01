@@ -23,8 +23,4 @@ if (!array_key_exists($req, $pagina)) {
 $x = $pagina[$req];
 // prendo i dati della pagina corrente
 
-if (isset($_POST['distanza'])) {
-    $distanza = $_POST['distanza'];
-} else {
-    $distanza = '';
-}
+

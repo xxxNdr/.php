@@ -10,3 +10,10 @@
     <input type="number" name="distanza[]" placeholder="distanza tappa">
     <input type="submit" value="Aggiungi Tappa">
 </form>
+
+<form action="index.php" method="post">
+    <input type="hidden" name="reset">
+    <input type="submit" value="Reset">
+</form>
+
+<p>Distanza totale inserita finora: {{totale}} km</p>

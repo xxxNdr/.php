@@ -19,7 +19,6 @@ echo render\r(
     $x['template'],
     [
         'titolo' => $x['body']['titolo'],
+        'totale' => $totale
     ]
 );
-
-var_dump($_POST['distanza']);
