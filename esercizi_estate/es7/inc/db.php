@@ -12,7 +12,7 @@ if (!$conn) {
     die("Connessione al database fallita: " . mysqli_connect_error());
 } else {
     $info = "<p>";
-    $info .= "Connessione OK. Server: " . mysqli_get_server_info($conn) . "<br>";
+    $info .= "Server: " . mysqli_get_server_info($conn) . "<br>";
     $info .= "Versione client: " . mysqli_get_client_info() . "<br>";
     $info .= "Protocollo: " . mysqli_get_proto_info($conn) . "<br>";
     $info .= "Host: " . mysqli_get_host_info($conn) . "<br>";
