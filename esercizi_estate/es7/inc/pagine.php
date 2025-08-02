@@ -6,7 +6,7 @@ $pagina = [
         'body' => [
             'titolo' => 'Calcola distanza tragitto',
         ],
-        'template' => 'tpl/form.html',
+        'template' => 'tpl/main.html',
         'include' => 'lib/render.php'
     ]
 ];

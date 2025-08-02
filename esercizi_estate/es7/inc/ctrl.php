@@ -12,10 +12,10 @@ function aggiungi(array $distanze)
     /* $conn è la connessione al database ed è una variabile globale
         ma dentro le funzioni va richiamata */
 
-    $sql = "INSERT INTO tappe (distanza) VALUES (?)";
+    $query = "INSERT INTO tappe (distanza) VALUES (?)";
     // scrivo la query coi segnaposto per evitare SQL injecion
 
-    $stmt = mysqli_prepare($conn, $sql);
+    $stmt = mysqli_prepare($conn, $query);
     /* mysqli prepare invia al database la query in forma preparata, senza
         inserire ancora i valori */
 
@@ -60,7 +60,7 @@ if (!empty($_POST['distanza']) && is_array($_POST['distanza'])) {
     // se il form è stato inviato aggiungi i dati inviati al database
 }
 
-if(isset($_POST['reset'])){
+if (isset($_POST['reset'])) {
     // se l'utente preme il pilsante reset
 
     mysqli_query($conn, "DELETE FROM tappe");
@@ -110,3 +110,32 @@ if ($ris) {
     // buona prassi dopo aver usato SELECT 
 }
 
+$rows = "";
+// stringa vuota che servirà a contenere tutte le righe della tabella
+
+$queryTappe = mysqli_query($conn, "SELECT id, distanza, data_inserimento FROM tappe ORDER BY id");
+/* salvo nella variabile il risultato della query, che è un oggetto speciale
+non un array */
+
+if ($queryTappe && mysqli_num_rows($queryTappe) > 0) {
+    // controllo che la query sia riuscita e abbia almeno una riga
+
+    while ($row = mysqli_fetch_assoc($queryTappe)) {
+        /* fetch_assoc prende una riga alla volta dal risultato come array associativo,
+        le chiavi corrispondo ai nomi delle colonne
+        il while continua finché ci sono righe */
+
+        $rows .= '<tr>';
+        $rows .= '<td>' . $row['id'] . '</td>';
+        $rows .= '<td>' . $row['distanza'] . '</td>';
+        $rows .= '<td>' . $row['data_inserimento'] . '</td>';
+        $rows .= '</tr>';
+        /* per ogni riga del database costruisco una riga html,
+        all'interno della riga ci sono tre celle con i valori delle colonne */
+    }
+    mysqli_free_result($queryTappe);
+} else {
+    $rows = "<tr><td colspan='3'>Nessuna Tappa Inserita</td></tr>";
+    /* se la query è fallita allora in $rows si salva una riga con un
+    solo td allragato a 3 celle col messaggio nessuna tappa inserita */
+}

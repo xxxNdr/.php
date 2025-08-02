@@ -1,6 +1,5 @@
 <?php
 
-
 /* esercizio 07
 Scrivere un programma che consenta agli utenti di inserire un itinerario composto da
 un numero arbitrario di tappe; il programma deve contenere un array associativo nel quale
@@ -19,6 +18,8 @@ echo render\r(
     $x['template'],
     [
         'titolo' => $x['body']['titolo'],
-        'totale' => $totale
+        'totale' => $totale,
+        'form' => 'tpl/form.html',
+        'tabella' => 'tpl/table.html'
     ]
 );
