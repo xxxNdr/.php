@@ -47,9 +47,8 @@ function aggiungi(array $distanze)
                    In questo modo l'utente non riceve un messaggio di errore diretto,
                    ma lo sviluppatore può investigare leggendo il log. */
 
-                // Qui si registra l'errore nel file log configurato nel PHP/Apache
                 error_log("Errore nell'esecuzione della query: " . mysqli_stmt_error($stmt));
-
+                // Qui si registra l'errore nel file log configurato nel PHP/Apache
                 /*
                  * In ambiente XAMPP, i file di log errori si trovano generalmente in:
                  * - Per Apache:  C:\xampp\apache\logs\error.log
@@ -69,7 +68,7 @@ function aggiungi(array $distanze)
 
 
 // Se è stato inviato tramite POST un array 'distanza',
-// e questo è non vuoto e realmente un array, chiamo la funzione aggiungi
+// e questo è non vuoto ed è realmente un array, chiamo la funzione aggiungi
 if (!empty($_POST['distanza']) && is_array($_POST['distanza'])) {
     aggiungi($_POST['distanza']);
 }
