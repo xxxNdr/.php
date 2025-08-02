@@ -43,9 +43,15 @@ function aggiungi(array $distanze)
             mysqli_stmt_bind_param($stmt, 'i', $d);
 
             if (!mysqli_stmt_execute($stmt)) {
-                /* Se l'esecuzione fallisce, scrivo l'errore nel file di log.
-                   In questo modo l'utente non riceve un messaggio di errore diretto,
-                   ma lo sviluppatore può investigare leggendo il log. */
+                /* significa: "esegui la query, se fallisce entra nel blocco if e gestisci l'errore".
+                Non è necessario un else perché normalmente non c’è codice da eseguire nel caso di successo,
+                o si può semplicemente continuare oltre.
+
+                In pratica, questa è una prassi comune per gestire errori:
+                si prova qualcosa e, con la negazione (!), si intercettano le condizioni di fallimento.
+
+                In questo modo l'utente non riceve un messaggio di errore diretto,
+                ma lo sviluppatore può investigare leggendo il log. */
 
                 error_log("Errore nell'esecuzione della query: " . mysqli_stmt_error($stmt));
                 // Qui si registra l'errore nel file log configurato nel PHP/Apache
