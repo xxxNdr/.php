@@ -11,7 +11,7 @@ $conn = mysqli_connect($server, $usr, $pw, $db, $port); // ordine obbligatorio d
 if (!$conn) {
     die("Connessione al database fallita: " . mysqli_connect_error());
 } else {
-    $info = "<div>";
+    $info = "<p>";
     $info .= "Connessione OK. Server: " . mysqli_get_server_info($conn) . "<br>";
     $info .= "Versione client: " . mysqli_get_client_info() . "<br>";
     $info .= "Protocollo: " . mysqli_get_proto_info($conn) . "<br>";
@@ -29,10 +29,10 @@ if (!$conn) {
     $count = mysqli_query($conn, "SELECT COUNT(*) AS tot FROM tappe");
     $row = mysqli_fetch_assoc($count);
     $info .= "Record in tappe: " . $row['tot'] . "<br><br>";
-    $info .= "<h3>Info Sistema</h3>";
+    $info .= "<p><strong>Info Sistema</strong></p>";
     $info .= "PHP: " . phpversion() . "<br>";
     $info .= "OS: " . php_uname('s') . " " . php_uname('r') . "<br>";
     $info .= "Memoria PHP: " . ini_get('memory_limit') . "<br>";
     $info .= "Max upload: " . ini_get('upload_max_filesize') . "<br>";
-    $info .= "</div>";
+    $info .= "</p>";
 }
