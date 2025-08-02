@@ -121,8 +121,9 @@ if ($queryTappe && mysqli_num_rows($queryTappe) > 0) {
     // controllo che la query sia riuscita e abbia almeno una riga
 
     while ($row = mysqli_fetch_assoc($queryTappe)) {
-        /* fetch_assoc prende una riga alla volta dal risultato come array associativo,
-        le chiavi corrispondo ai nomi delle colonne
+        /* fetch_assoc prende una riga alla volta dal risultato
+        di $queryTappe come array associativo,
+        le chiavi corrispondono ai nomi delle colonne
         il while continua finché ci sono righe */
 
         $rows .= '<tr>';
