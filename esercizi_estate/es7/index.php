@@ -20,6 +20,7 @@ echo render\r(
         'titolo' => $x['body']['titolo'],
         'totale' => $totale,
         'form' => 'tpl/form.html',
-        'tabella' => 'tpl/table.html'
+        'tabella' => 'tpl/table.html',
+        'info' => $info ?? ''
     ]
 );
