@@ -61,7 +61,7 @@ if (!empty($_POST['distanza']) && is_array($_POST['distanza'])) {
 }
 
 if (isset($_POST['reset'])) {
-    // se l'utente preme il pilsante reset
+    // se l'utente preme il pulsante reset
 
     mysqli_query($conn, "DELETE FROM tappe");
     // la query cancella tutti i record dalla tabella
