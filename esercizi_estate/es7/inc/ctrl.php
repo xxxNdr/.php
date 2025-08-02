@@ -4,139 +4,151 @@ require_once 'db.php';
 
 function aggiungi(array $distanze)
 {
-    /* $distanze è un array che conterrà tutte le distanze
-        inviate tramite form che poi alla fine verranno sommate
-        per calcolare la distanza totale del tragitto */
+    /* Il parametro $distanze è un array contenente tutti i valori delle distanze
+       inviati tramite form. L'obiettivo è inserire ogni distanza come nuovo record
+       nella tabella 'tappe' per consentire il calcolo del tragitto totale. */
 
     global $conn;
-    /* $conn è la connessione al database ed è una variabile globale
-        ma dentro le funzioni va richiamata */
+    /* $conn è la connessione effettuata al database MySQL.
+       Poiché è definita esternamente allo script, dentro la funzione viene richiamata
+       come variabile globale per poter essere utilizzata. */
 
     $query = "INSERT INTO tappe (distanza) VALUES (?)";
-    // scrivo la query coi segnaposto per evitare SQL injecion
+    /* La query contiene un segnaposto '?' per la distanza.
+       L'uso del segnaposto permette di evitare SQL Injection e di eseguire
+       query preparate con valori differenti */
 
     $stmt = mysqli_prepare($conn, $query);
-    /* mysqli prepare invia al database la query in forma preparata, senza
-        inserire ancora i valori */
+    /* mysqli_prepare prepara la query in modo sicuro,
+       lasciando da associare solo i valori reali più avanti */
 
     if (!$stmt) {
         die("Fallimento nella preparazione della query: " . mysqli_error($conn));
-        // die interrompe lo script se fallisce $stmt mostrando un messaggio
+        /* Se la query non può essere preparata (ad esempio per errore sintattico,
+           problema di connessione, ecc), interrompe l'esecuzione mostrando il messaggio di errore */
     }
 
     foreach ($distanze as $d) {
         $d = (int)$d;
-        /* ora per sicurezza ogni valore passato lo trasformo in intero */
+        /* Casting a intero per garantire che si inseriscano solo numeri interi.
+           Questo previene l'inserimento di valori errati. */
 
         if ($d > 0) {
-            mysqli_stmt_bind_param($stmt, 'i', $d);
-            /* inoltre controllo sia sempre maggiore di 0 prima di
-    associare il valore reale al segnaposto con stmt bind param.
-    Passo a bind param lo statement precompilato, gli dico di sostituire
-    il ? con un intero, che è il terzo parametro, $d, della funzione */
+            /* Store di valori maggiori di zero (escludo zeri e valori negativi) */
 
-            /* ora sono pronto a fare eseguire la query al database col valore legato
-    al placeholder */
+            /*
+             * mysqli_stmt_bind_param associa il valore $d al segnaposto '?' nella query.
+             * Specificando 'i' indichiamo che il valore è un intero.
+             */
+            mysqli_stmt_bind_param($stmt, 'i', $d);
 
             if (!mysqli_stmt_execute($stmt)) {
+                /* Se l'esecuzione fallisce, scrivo l'errore nel file di log.
+                   In questo modo l'utente non riceve un messaggio di errore diretto,
+                   ma lo sviluppatore può investigare leggendo il log. */
+
+                // Qui si registra l'errore nel file log configurato nel PHP/Apache
                 error_log("Errore nell'esecuzione della query: " . mysqli_stmt_error($stmt));
-                /* stmt_execute esegue la query e se fallisce registra l'errore nei file di log. Questo non è
-    un messaggio che vede l'utente a differenza di die, ma un messaggio che legge lo
-    sviluppatore accedendo a \xampp\apache\logs\error.log
-    oppure a \xampp\php\logs\php_error_log */
+
+                /*
+                 * In ambiente XAMPP, i file di log errori si trovano generalmente in:
+                 * - Per Apache:  C:\xampp\apache\logs\error.log
+                 * - Per PHP:     C:\xampp\php\logs\php_error_log
+                 *
+                 * Lo sviluppatore può aprire questi file per leggere i messaggi di errore
+                 * e capire cosa è andato storto durante l'esecuzione della query.
+                 */
             }
         }
     }
+
     mysqli_stmt_close($stmt);
-    /* una volta inseriti tutti i valori chiudo lo statement così da liberare le risorse
-     occupate precedentemente */
+    /* Dopo aver eseguito tutti gli inserimenti, chiudo lo statement
+       per liberare risorse nel server MySQL */
 }
 
+
+// Se è stato inviato tramite POST un array 'distanza',
+// e questo è non vuoto e realmente un array, chiamo la funzione aggiungi
 if (!empty($_POST['distanza']) && is_array($_POST['distanza'])) {
-    /* la funzione aggiungi si apsetta un array e per sicurezza aggiungo in questo if
-    di eseguire la funzione non solo se è inviato il dato ma se è anche array */
-
     aggiungi($_POST['distanza']);
-    // se il form è stato inviato aggiungi i dati inviati al database
 }
 
+
+// Se l'utente preme il pulsante 'reset' (presenza di 'reset' nel POST),
+// svuoto la tabella tappe e resetto l'auto_increment a 1
 if (isset($_POST['reset'])) {
-    // se l'utente preme il pulsante reset
 
+    // Cancello tutti i record nella tabella 'tappe'
     mysqli_query($conn, "DELETE FROM tappe");
-    // la query cancella tutti i record dalla tabella
 
+    // Resetto il valore dell'auto_increment a 1 così il prossimo record avrà id 1
     mysqli_query($conn, "ALTER TABLE tappe AUTO_INCREMENT = 1");
-    // resetto a 1 il contatore dell'id
-    // il prossimo record avrà id 1
 
+    /*
+     * Eseguo il redirect HTTP verso 'index.php' usando l’header Location.
+     * 
+     * Cos’è un redirect?
+     * - È un comando inviato al browser per farlo caricare una nuova pagina (in questo caso index.php).
+     * 
+     * Perché serve qui?
+     * - Dopo aver cancellato i dati e resettato l’auto_increment,
+     *   vogliamo che la pagina si ricarichi pulita senza ripetere la cancellazione nel caso
+     *   di refresh (premendo F5).
+     * 
+     * Come funziona tecnicamente:
+     * - L’header HTTP Location "Location: index.php" dice al browser di fare una nuova richiesta GET,
+     *   evitando cosi che il form POST venga inviato di nuovo (che causerebbe
+     *   la ripetizione dell’operazione di reset).
+     * 
+     * Nota importante:
+     * - Dopo aver inviato un header di redirect, *devi* terminare lo script con exit;
+     *   altrimenti PHP continuerebbe ad eseguire il codice sottostante, cosa non desiderata.
+     */
     header("Location: index.php");
-    /* php dice al browser vai a index.php
-    il browser fa una nuova richiesta GET
-    php calcola il totale a 0
-    se utente preme F5 non ripete il reset ma
-    ricarica solo la pagina
-    */
-
     exit;
-    // il resto del codice php non viene eseguito
 }
 
-// ora sono pronto a calcolare la somma delle distanze
 
+// Inizializzo la variabile che conterrà il totale delle distanze a zero
 $tot = 0;
-// inizializzo il totale a 0
 
+// Eseguo la query per calcolare la somma di tutti i valori presenti nella colonna distanza
 $ris = mysqli_query($conn, "SELECT SUM(distanza) tot FROM tappe");
-// preparo la query che somma le distanze (somma di righe nel DB)
-// calcola la somma di tutti i valori della colonna distanza nella tabella tappe
 
 if ($ris) {
     $record = mysqli_fetch_assoc($ris);
-    /* questa funzione prende la riga del risultato della query e la converte
-    in array associativo.
-    Nel mio caso l'unica chiave sarà tot che contiene la somma calcolata.
-    tot è l'alias che ho dato nella query scritta sopra quando calcolo la somma.
-    Quindi l'array ha questo aspetto:
-    $record = ['tot' => somma delle distanze] */
+    /* Prendo la riga di risultato (con un solo campo 'tot')
+       e la salvo in array associativo */
 
     $totale = (int)($record['tot'] ?? 0);
-    // ?? 0 = se il record non esiste o è null usa 0 come valore di default
-    // PHP è in grado da solo di convertire stringa in intero
-    // ma per siurezza lo faccio io
+    // Assegno la somma calcolata o 0 se non ci sono record
 
     mysqli_free_result($ris);
-    // libero la memoria usata dal risultato della query
-    // buona prassi dopo aver usato SELECT 
+    // Libero la memoria utilizzata dal risultato della query
 }
 
+
+// Creo una stringa vuota che conterrà tutte le righe HTML della tabella
 $rows = "";
-// stringa vuota che servirà a contenere tutte le righe della tabella
 
 $queryTappe = mysqli_query($conn, "SELECT id, distanza, data_inserimento FROM tappe ORDER BY id");
-/* salvo nella variabile il risultato della query, che è un oggetto speciale
-non un array */
 
 if ($queryTappe && mysqli_num_rows($queryTappe) > 0) {
-    // controllo che la query sia riuscita e abbia almeno una riga
-
     while ($row = mysqli_fetch_assoc($queryTappe)) {
-        /* fetch_assoc prende una riga alla volta dal risultato
-        di $queryTappe come array associativo,
-        le chiavi corrispondono ai nomi delle colonne
-        il while continua finché ci sono righe */
+        /* Ciclo sulle righe restituite dalla query:
+           per ogni riga genero una riga html da inserire nella tabella */
 
         $rows .= '<tr>';
         $rows .= '<td>' . $row['id'] . '</td>';
         $rows .= '<td>' . $row['distanza'] . '</td>';
         $rows .= '<td>' . $row['data_inserimento'] . '</td>';
         $rows .= '</tr>';
-        /* per ogni riga del database costruisco una riga html,
-        all'interno della riga ci sono tre celle con i valori delle colonne */
     }
+
     mysqli_free_result($queryTappe);
 } else {
     $rows = "<tr><td colspan='3'>Nessuna Tappa Inserita</td></tr>";
-    /* se la query è fallita allora in $rows si salva una riga con un
-    solo td allargato a 3 celle col messaggio nessuna tappa inserita */
+    /* Se non ci sono righe nella tabella,
+       preparo una riga unica con messaggio di assenza dati */
 }
