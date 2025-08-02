@@ -137,5 +137,5 @@ if ($queryTappe && mysqli_num_rows($queryTappe) > 0) {
 } else {
     $rows = "<tr><td colspan='3'>Nessuna Tappa Inserita</td></tr>";
     /* se la query è fallita allora in $rows si salva una riga con un
-    solo td allragato a 3 celle col messaggio nessuna tappa inserita */
+    solo td allargato a 3 celle col messaggio nessuna tappa inserita */
 }
