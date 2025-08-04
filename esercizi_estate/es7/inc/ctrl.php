@@ -134,26 +134,34 @@ if ($ris) {
 }
 
 
-// Creo una stringa vuota che conterrà tutte le righe HTML della tabella
 $rows = "";
+// Creo una stringa vuota che conterrà tutte le righe HTML della tabella
 
 $queryTappe = mysqli_query($conn, "SELECT id, distanza, data_inserimento FROM tappe ORDER BY id");
+/* eseguo la query che seleziona questi campi,
+il suo risultato viene memorizzato in $queryTappe */
 
 if ($queryTappe && mysqli_num_rows($queryTappe) > 0) {
+    /* controllo che la query sia stata eseguita, non sia false,
+    e che ci sia almeno una riga di risultato */
+
     while ($row = mysqli_fetch_assoc($queryTappe)) {
-        /* Ciclo sulle righe restituite dalla query:
-           per ogni riga genero una riga html da inserire nella tabella */
-
-        $rows .= '<tr>';
-        $rows .= '<td>' . $row['id'] . '</td>';
-        $rows .= '<td>' . $row['distanza'] . '</td>';
-        $rows .= '<td>' . $row['data_inserimento'] . '</td>';
-        $rows .= '</tr>';
+        /* questo è un ciclo che itera su ogni riga del risultato della query
+        fetch_assoc ottiene la riga corrente come array associativo, dove la chiave
+        è il nome della colonna
+        */
+        $rows .= render\r(
+            // per ogni riga faccio il render del template
+            'tpl/tableRow.html',
+            [
+                'id' => $row['id'],
+                'distanza' => $row['distanza'],
+                'data_inserimento' => $row['data_inserimento']
+            ]
+        );
     }
-
-    mysqli_free_result($queryTappe);
 } else {
     $rows = "<tr><td colspan='3'>Nessuna Tappa Inserita</td></tr>";
     /* Se non ci sono righe nella tabella,
-       preparo una riga unica con messaggio di assenza dati */
+    preparo una riga unica con messaggio di assenza dati */
 }
