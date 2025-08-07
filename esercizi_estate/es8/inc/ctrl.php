@@ -18,6 +18,24 @@ $optional = [
     'suite' => 500
 ];
 
+$risultato = "";
+
+if (isset($_POST['destinazioni'])) {
+    $scelta = $_POST['destinazioni'];
+    $costoDestinazione = $destinazioni[$scelta] ?? 0;
+
+    $costoOptional = 0;
+    if (isset($_POST['optional'])) {
+        foreach ($_POST['optional'] as $o) {
+            if (isset($optional[$o])) {
+                $costoOptional += $optional[$o];
+            }
+        }
+    }
+    $tot = $costoDestinazione + $costoOptional;
+    $risultato = render\r('tpl/risultato.html', ['totale' => $tot]);
+}
+
 $select = select\select($destinazioni, "mediterraneo", "destinazioni");
 $checkbox = checkbox\checkbox($optional);
 
@@ -25,7 +43,7 @@ $form = render\r(
     'tpl/form.html',
     [
         'destinazioni' => $select,
-        'optional' => $checkbox
+        'optional' => $checkbox,
     ]
 );
 

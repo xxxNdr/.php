@@ -19,5 +19,6 @@ echo render\r(
     [
         'titolo' => $x['body']['titolo'],
         'form' => $form,
+        'risultato' => $risultato
     ]
 );
