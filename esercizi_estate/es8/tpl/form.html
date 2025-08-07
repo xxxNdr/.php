@@ -1,9 +1,18 @@
 <form action="index.php" method="post">
-    <h3>DESTINAZIONI</h3>
-    
+    <h3 id="destinazioni-title">DESTINAZIONI</h3>
+    <!--
+    aria-labelledby
+    La mia select ha questo attributo con valore $name-title
+    ovvero "destinazioni-title"
+    Questo permette di eliminare la label della select,
+    collegarla semanticamente a questo h3,
+    mantenendo l'accessibilità
+    -->
+
     {{destinazioni}}
 
-    <h3>OPTIONAL</h3>
+    <h3 id="optional-title">OPTIONAL</h3>
     {{optional}}
-    <input type="submit" value="Calcola costo">
+    <input type="submit" value="Reset" name="reset" class="i">
+    <input type="submit" value="Calcola costo" class="i">
 </form>

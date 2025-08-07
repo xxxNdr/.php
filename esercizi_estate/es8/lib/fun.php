@@ -16,8 +16,7 @@ namespace select {
 
     function select(array $dati, string $opzione_selezionata = "", string $name = "selezione")
     {
-        $output = "<label for name=\"$name\">" . ucfirst($name) . "</label>";
-        $output .= "<select name=\"$name\" id=\"$name\">";
+        $output = "<select name=\"$name\" id=\"$name\" aria-labelledby=\"$name-title\">";
         foreach ($dati as $k => $v) {
             $selected = ($k === $opzione_selezionata) ? "selected" : "";
             $output .= "<option value= \"$k\" $selected>" . ucfirst($k) . " ($v €)</option>";

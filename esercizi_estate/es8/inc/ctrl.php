@@ -36,6 +36,18 @@ if (isset($_POST['destinazioni'])) {
     $risultato = render\r('tpl/risultato.html', ['totale' => $tot]);
 }
 
+if(isset($_POST['reset'])){
+header("Location: " . $_SERVER['PHP_SELF'])
+/* I dati vengono cancellati tramite redirect
+    Il browser riceve l'istruzione di ricaricare index.php
+    tramite una nuova richiesta GET
+    senza inviare i dati POST inseriti precedentemente nel form
+    Questo comporta che tutte le variabili inviate via POST,
+    inclusi i dati compilati nel form,
+    vadano persi perché la nuova richiesta non li contiene*/;
+exit;
+}
+
 $select = select\select($destinazioni, "mediterraneo", "destinazioni");
 $checkbox = checkbox\checkbox($optional);
 
@@ -46,4 +58,3 @@ $form = render\r(
         'optional' => $checkbox,
     ]
 );
-

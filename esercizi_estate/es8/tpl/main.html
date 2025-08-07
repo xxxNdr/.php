@@ -5,19 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{titolo}}</title>
+    <link rel="stylesheet" href="s.css">
 </head>
 
-<body>
-    <header>
-        <h1>{{titolo}}</h1>
-    </header>
 
-    <main>
-        {{form}}
-    </main>
-<footer>
-    {{risultato}}
-</footer>
+<body>
+    <video autoplay muted loop playsinline id="bgv">
+        <source src="vid/sea.mp4" type="video/mp4">
+    </video>
+    <div class="fg">
+        <header>
+            <h1>{{titolo}}</h1>
+        </header>
+
+        <main>
+            {{form}}
+        </main>
+        <footer>
+            {{risultato}}
+        </footer>
+    </div>
 </body>
 
 </html>
