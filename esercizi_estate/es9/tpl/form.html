@@ -1,0 +1,17 @@
+<form action="index.php" method="post">
+    <h4>Aggiungi nuovo studente</h4>
+    <input type="text" name="studente" placeholder="nome studente">
+    <label><input type="radio" name="genere" value="M">Maschio</label>
+    <label><input type="radio" name="genere" value="F">Femmina</label>
+    <input type="text" name="amico" placeholder="amici separati da virgola">
+    <input type="submit" value="Aggiungi">
+</form>
+
+<hr>
+
+<form action="index.php" method="post">
+    <input type="submit" name="calcola" value="Genera Stanze"> 
+    <input type="submit" name="cancella" value="Resetta"> 
+</form>
+
+{{lista_studenti}}
