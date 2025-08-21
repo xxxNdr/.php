@@ -9,3 +9,5 @@ data_inserimento timestamp default current_timestamp
 
 describe tappe;
 
+select *
+from tappe;
