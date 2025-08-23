@@ -6,9 +6,6 @@ $pagine = [
             "titolo" => "La Maratona Cinematrografica?"
         ],
         "template" => "tpl/main.html",
-        "include" => [
-            "inc/ctrl.php"
-        ]
     ]
 ];
 

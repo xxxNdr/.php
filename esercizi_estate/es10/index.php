@@ -16,9 +16,6 @@ foreach (glob('lib/*.php') as $file) {
 foreach (glob('inc/*.php') as $file) {
     require_once $file;
 }
-foreach ($x['include'] as $file) {
-    require_once $file;
-}
 
 echo render\r(
     $x['template'],
