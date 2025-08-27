@@ -1,6 +1,7 @@
 <?php
 
 include 'inc/dati.php';
+include 'inc/ottimizzazione.php';
 
 
 $risultato = '';
@@ -28,12 +29,18 @@ if (isset($_POST['gen'])) {
             */
     });
 
-    if (empty($trovati)) {
-        $risultato = "Nessun genere trovato per la tua scelta: " . implode(', ', $fav);
+    $ottimi = ottimizza($trovati);
+
+    if (empty($ottimi)) {
+        $risultato = "Nessun film disponibile con orari ottimizzati in relazione alle tue preferenze: " . implode(', ', $fav);
     } else {
         $risultato = "<h3>Film disponibili:</h3>";
-        foreach ($trovati as $f) {
+        foreach ($ottimi as $f) {
             $risultato .= "<p><strong>{$f['titolo']}</strong><br> genere: {$f['genere']}, delle ore: {$f['orario']}</p>";
         }
     }
 };
+
+// echo '<pre>';
+// var_dump($ottimi);
+// echo '</pre>';
