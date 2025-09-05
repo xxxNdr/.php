@@ -1,0 +1,35 @@
+* {
+  box-sizing: border-box;
+}
+
+body, label, form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+input[type="number"] {
+  width: 40px;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input {
+  margin: 10px 0;
+}
+
+footer > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+div > h3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

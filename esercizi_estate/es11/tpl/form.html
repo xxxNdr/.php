@@ -1,0 +1,20 @@
+<h3>INSERISCI STUDENTI E VOTI</h3>
+<form action="index.php" method="post" onsubmit="return prepara()">
+    <!-- la funzione prepara serializza l'array studenti in JSON dentro un campo hidden -->
+    <div id="contenitoreStudenti">
+        <div class="studente">
+            <label>Nominativo: <input type="text" name="studente[0][nome]"></label>
+            <label>Matematica: <input type="number" name="studente[0][mat]"></label>
+            <label>Grammatica: <input type="number" name="studente[0][gra]"></label>
+            <label>Geografia: <input type="number" name="studente[0][geo]"></label>
+            <label>Storia: <input type="number" name="studente[0][sto]"></label>
+            <label>Biologia: <input type="number" name="studente[0][bio]"></label>
+            <label>Psicologia: <input type="number" name="studente[0][psi]"></label>
+        </div>
+    </div>
+    <input type="button" onclick="aggiungi()" value="Aggiungi studente">
+    <input type="submit" value="Studente migliore">
+    <input type="hidden" name="js" id="js">
+    <input type="submit" value="Reset" name="reset">
+    <!-- il campo hidden per inviare i dati JSON in POST a PHP -->
+</form>
