@@ -48,13 +48,13 @@ function aggiornaFooter() {
   let classe = "<h3>Studenti inseriti</h3>";
   classe += "<ul>";
   studenti.forEach((studente, i) => {
-    classe += `<li><strong>${studente.nome}</strong><br>:
-    Matematica:${studente.mat}<br>,
-    Grammatica:${studente.gra}<br>,
-    Geografia:${studente.geo}<br>,
-    Storia:${studente.sto}<br>,
-    Biologia:${studente.bio}<br>,
-    Psicologia:${studente.psi}</li>`;
+    classe += `<li><strong>${studente.nome}</strong><br>
+    Matematica: ${studente.mat}<br>
+    Grammatica: ${studente.gra}<br>
+    Geografia: ${studente.geo}<br>
+    Storia: ${studente.sto}<br>
+    Biologia: ${studente.bio}<br>
+    Psicologia: ${studente.psi}</li>`;
   });
   classe += "</ul>";
 

@@ -17,14 +17,24 @@ if ($_POST['reset'] ?? '') {
         if (!empty($s['nome'])) {
             $media = calcolaMedia($s);
             $medie[$s['nome']] = $media;
+            if ($medie[$s['nome']] < 6) {
+                $insufficienti[] = $s['nome'];
+            }
         }
     }
     if (!empty($medie)) {
         $mediaMax = max($medie);
         $migliore = array_search($mediaMax, $medie);
-        $migliore = "<h3>Lo studente migliore è: <br>" . '<strong>' . $migliore . '</strong></h3>';
+        $migliore = "<h3>Lo studente migliore è: <br>" . '<strong>' . $migliore . '</strong>' . " con una media del " .  $mediaMax . '</h3>';
     } else {
         $risultato = $migliore = "Nessun dato disponibile per gli studenti";
+    }
+
+    if (!empty($insufficienti)) {
+        $insufficientiStr = implode(', ', $insufficienti);
+        $insufficienti = "<h3>Quelli con insufficienze sono: " . $insufficientiStr . "</h3>";
+    } else {
+        $insufficienti = '';
     }
 }
 

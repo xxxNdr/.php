@@ -26,6 +26,7 @@ echo render\r(
         'titolo' => $x['body']['titolo'],
         'form' => $form,
         'risultato' => $risultato,
-        'migliore' => $migliore
+        'migliore' => $migliore,
+        'insufficienti' => $insufficienti ?? ''
     ]
 );
