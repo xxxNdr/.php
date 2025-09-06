@@ -1,0 +1,13 @@
+RewriteEngine on
+
+# Indica ad Apache la base relativa da cui partire per riscrivere l'URL
+RewriteBase /
+
+# rewritecond mantiene risorse statiche da servire al client
+# e consegna a index.php url virtuali o directory che non esistono da riscrivere
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# instrada tutte le richiesta a index.php con x che contiene l'URL richiesto
+# questa regex cattura tutto tranne stringhe vuote!
+RewriteRule ^(.+)$ index.php?x=$1 [QSA,L]
