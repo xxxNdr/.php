@@ -1,0 +1,10 @@
+{
+    "name": "xxxndr/piatti-ingredienti",
+    "description": "lib/ext è la cartella di installazione delle librerie\n",
+    "config": {
+        "vendor-dir": "lib/ext/"
+    },
+    "require": {
+        "twig/twig": "3.*"
+    }
+}
