@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1> Ciao {{ nome }}!</h1>
+    <p>Hai inserito i seguenti numeri:
+    {% for n in numeri %}
+        {{ n }}{% if not loop.last %}, {% endif %}
+    {% endfor %}
+    </p>
+    <p>Hai inserito i seguenti numeri: {{ numeri|join(', ') }}</p>
+    {{ include('inc/lista.numeri.twig') }}
+    <p>E mi hai detto di scrivere andrea così: {{'ciao andrea'|upper}}
+    <p>Lunghezza: {{'ciao andrea'|length}}
+    <p>Data: {{'now'|date("d/m/Y")}}
+    <p>Ora: {{'now'|date("H:i:s")}}
+</body>
+</html>

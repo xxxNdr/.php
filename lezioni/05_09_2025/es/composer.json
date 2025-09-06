@@ -1,0 +1,10 @@
+{
+    "name": "esercizio/in_classe",
+    "description": "es in classe",
+    "config": {
+        "vendor-dir": "lib/ext/"
+    },
+    "require": {
+        "twig/twig": "3.*"
+    }
+}

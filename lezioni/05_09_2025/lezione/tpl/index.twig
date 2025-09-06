@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twig Test</title>
+</head>
+<body>
+    <h1> Ciao {{nome}}!</h1>
+    {% if variabile %}
+    <p>La variabile è vera!</p>
+    {% else %}
+    <p>La variabile è falsa<p>
+    {% endif %}
+    <p>Hai inserito i seguenti numeri:
+    {% for numero in numeri %}
+    {{ numero }}{% if not loop.last %}, {% endif %}
+    {% endfor %}
+    </p>
+    <ul>
+    {%for persona in lista %}
+    <li>{{persona.nome}}{{persona.cognome}}</li>
+    {% endfor %}
+    <ul>
+    <select>
+    {% for chiave, valore in colori %}
+    <option value="{{chiave}}">{{valore}}</option>
+    {% endfor %}
+    </select>
+
+    
+</body>
+</html>
