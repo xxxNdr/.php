@@ -1,7 +1,7 @@
 RewriteEngine on
 
 # Indica ad Apache la base relativa da cui partire per riscrivere l'URL
-RewriteBase /
+RewriteBase /lezioni/08_09_2025/esPerCasa/
 
 # rewritecond mantiene risorse statiche da servire al client
 # e consegna a index.php url virtuali o directory che non esistono da riscrivere
