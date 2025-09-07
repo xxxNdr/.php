@@ -18,7 +18,9 @@
 		</header>
 		<main>
 			<h1>{{titolo}}</h1>
-			{{main}}
+			<div>
+				{% include tipo == 'piatto' ? 'formPiatto.twig' : 'formIngrediente.twig' %}
+			</div>
 		</main>
 		<footer>
 			{{risultato}}

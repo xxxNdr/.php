@@ -15,9 +15,15 @@ require_once 'lib/ext/autoload.php';
 $lo = new \Twig\Loader\FilesystemLoader('tpl');
 $tw = new \Twig\Environment($lo);
 $te = $tw->load('.twig');
+
+$x = $_REQUEST['x'] ?? 'lista.piatti';
+$tipo = (strpos($x, 'piatti') == true) ? 'piatto' : 'ingrediente';
+$titolo = $pagine[$x]['body']['titolo'] ?? 'Default';
+
 echo $te->render(
     [
-        'titolo' => $x['body']['titolo'],
+        'titolo' => $titolo,
         'pagine' => $pagine,
+        'tipo' => $tipo
     ]
 );
