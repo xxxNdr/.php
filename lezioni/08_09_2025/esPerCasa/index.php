@@ -5,6 +5,9 @@
 foreach(glob('inc/*.php') as $f){
     require_once $f;
 }
+foreach(glob('mvc/*.php') as $f){
+    require_once $f;
+}
 
 /*
 Creare un database di piatti con due tabelle (piatti e ingredienti);
@@ -21,11 +24,17 @@ $tw = new \Twig\Environment($lo);
 $te = $tw->load('.twig');
 
 $info = tipo($pagine, $x);
+$piatti = \p\records();
+$ingredienti = \i\records();
+$azione = $_REQUEST['azione'] ?? 'aggiungi';
 
 echo $te->render(
     [
         'titolo' => $info['titolo'],
         'pagine' => $pagine,
-        'tipo' => $info['tipo']
+        'tipo' => $info['tipo'],
+        'piatti' => $piatti,
+        'ingredienti' => $ingredienti,
+        'azione' => $azione
     ]
 );
