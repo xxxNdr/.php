@@ -1,6 +1,10 @@
 <?php
 
-include 'inc/pagine.php';
+// error_reporting(E_ALL & ~E_WARNING);
+
+foreach(glob('inc/*.php') as $f){
+    require_once $f;
+}
 
 /*
 Creare un database di piatti con due tabelle (piatti e ingredienti);
@@ -16,14 +20,12 @@ $lo = new \Twig\Loader\FilesystemLoader('tpl');
 $tw = new \Twig\Environment($lo);
 $te = $tw->load('.twig');
 
-$x = $_REQUEST['x'] ?? 'lista.piatti';
-$tipo = (strpos($x, 'piatti') == true) ? 'piatto' : 'ingrediente';
-$titolo = $pagine[$x]['body']['titolo'] ?? 'Default';
+$info = tipo($pagine, $x);
 
 echo $te->render(
     [
-        'titolo' => $titolo,
+        'titolo' => $info['titolo'],
         'pagine' => $pagine,
-        'tipo' => $tipo
+        'tipo' => $info['tipo']
     ]
 );

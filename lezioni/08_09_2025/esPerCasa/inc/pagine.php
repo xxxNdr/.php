@@ -1,5 +1,6 @@
 <?php
 
+
 $pagine = [
     'lista.piatti' => [
         'body' => [
@@ -13,8 +14,4 @@ $pagine = [
     ]
 ];
 
-$x = (isset($_REQUEST['x']) && array_key_exists($_REQUEST['x'], $pagine))
-    ?
-    $pagine[$_REQUEST['x']]
-    :
-    $pagine['lista.piatti'];
+$x = (!isset($_REQUEST['x']) || !isset($pagine[$_REQUEST['x']])) ? 'lista.piatti' : $_REQUEST['x'];
