@@ -9,21 +9,21 @@ switch ($azione) {
         if ($nome !== '') {
             \p\aggiungi($nome);
         }
-        header("Location: /?x=piatti");
+        header("Location: /?x=lista.piatti");
         exit;
     case 'modifica':
         if ($idp > 0 && $nome !== '') {
-            \p\modifica($idp, $nome);
+            \p\modifica($nome, $idp);
         }
-        header("Location: /?x=piatti");
+        header("Location: /?x=lista.piatti");
         exit;
     case 'elimina':
         if ($idp > 0) {
             \p\elimina($idp);
         }
-        header("Location: /?x=piatti");
+        header("Location: /?x=lista.piatti");
         exit;
     default:
-        header("Location: /?x=piatti");
+        header("Location: /?x=lista.piatti");
         exit;
 }

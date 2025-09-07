@@ -30,3 +30,5 @@ La tabella ponte in MVC non sarà mostrata all'utente ma verrà utilizzata per c
 associazioni piatti ingredienti
 */
  );
+ 
+ select user();

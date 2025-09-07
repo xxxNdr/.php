@@ -22,7 +22,7 @@
 				{% include tipo == 'piatto' ? 'formPiatto.twig' : 'formIngrediente.twig' %}
 			</div>
 			<div id="tabella">
-				{% include tipo ~ 'tabella.twig' %}
+				{% include 'tabella' ~ (tipo|title) ~ '.twig' %}
 			</div>
 		</main>
 		<footer>
