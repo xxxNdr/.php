@@ -1,0 +1,10 @@
+{
+    "name": "xxxndr/es_15_09_2025",
+    "description": "esercizio per lunedì 15/09",
+    "config": {
+        "sort-packages": true
+    },
+    "require": {
+        "twig/twig": "*"
+    }
+}
