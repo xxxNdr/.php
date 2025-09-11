@@ -47,6 +47,3 @@ update pagine set contenuto = json_remove(contenuto, '$.template') where id > 0;
 
 select *
 from pagine;
-
-select *
-from cani;
