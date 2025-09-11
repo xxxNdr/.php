@@ -5,7 +5,7 @@ $x['contenuto']['dati']['status'] = 'nessuna operazione in corso';
 $x['contenuto']['dati']['id'] = "";
 $x['contenuto']['dati']['nome'] = "";
 $x['contenuto']['dati']['data_nascita'] = "";
-$x['contenuto']['lista'] = "";
+$x['contenuto']['lista_cani'] = "";
 
 $status = $x['contenuto']['dati']['status'] ?? '';
 $azione = null;
@@ -59,9 +59,7 @@ switch ($azione) {
         }
         break;
     default:
-        echo "WTF?!";
-        break;
 }
 
 $x['contenuto']['dati']['status'] = $status;
-$x['contenuto']['lista'] = \cani\record();
+$x['contenuto']['lista_cani'] = \cani\record();

@@ -1,6 +1,6 @@
 <?php
 
-namespace persone;
+namespace padroni;
 use mysqli_sql_exception;
 
 function aggiungi($nome, $telefono)

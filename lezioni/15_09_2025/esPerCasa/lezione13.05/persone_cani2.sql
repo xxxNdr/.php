@@ -20,7 +20,7 @@ contenuto json
 );
 
 insert into pagine (nome, contenuto) values
-('lista-persone', '{"titolo":"lista-persone","h1":"Lista Persone","menu":[]}'),
+('lista-padroni', '{"titolo":"lista-padroni","h1":"Lista Padroni","menu":[]}'),
 ('lista-cani', '{"titolo":"lista-cani","h1":"Lista Cani"}');
 
 update pagine
@@ -45,5 +45,17 @@ update pagine set template = json_unquote(json_extract(contenuto, '$.template'))
 
 update pagine set contenuto = json_remove(contenuto, '$.template') where id > 0;
 
+update pagine set contenuto = json_set(contenuto, '$.titolo', 'lista-padroni') where id = 1;
+update pagine set contenuto = json_set(contenuto, '$.titolo', 'lista-padroni') where id = 1;
+
 select *
 from pagine;
+
+select * from persone;
+select * from cani;
+describe pagine;
+
+SELECT contenuto FROM pagine WHERE id = 1;
+
+update pagine set url = 'lista-padroni', contenuto = json_set(contenuto, '$.titolo', 'lista-padroni') where id = 1;
+update pagine set contenuto = json_set(contenuto, '$.h1', 'Lista Padroni') where id = 1;

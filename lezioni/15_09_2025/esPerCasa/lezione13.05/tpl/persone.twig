@@ -1,8 +1,11 @@
 {% extends "main.twig" %}
 {% block head %}
-	<title>gestione persone</title>
+	<title>gestione padroni</title>
 {% endblock %}
 {% block header %}
 	{{parent()}}
-	<h1>Gestione Persone</h1>
+	<h1>Gestione Padroni</h1>
+{% endblock %}
+{% block main %}
+	{% include "form.tabella.persone.twig" %}
 {% endblock %}
