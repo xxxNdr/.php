@@ -53,9 +53,15 @@ from pagine;
 
 select * from persone;
 select * from cani;
-describe pagine;
+describe cani;
 
 SELECT contenuto FROM pagine WHERE id = 1;
 
 update pagine set url = 'lista-padroni', contenuto = json_set(contenuto, '$.titolo', 'lista-padroni') where id = 1;
 update pagine set contenuto = json_set(contenuto, '$.h1', 'Lista Padroni') where id = 1;
+update pagine set contenuto = json_set(contenuto, '$.template', 'padroni.twig') where id = 1;
+
+update pagine set template = 'padroni.twig'
+where id = 1;
+
+update pagine set contenuto = json_remove(contenuto, '$.template') where id = 1;
