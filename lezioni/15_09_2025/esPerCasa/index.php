@@ -11,16 +11,16 @@ foreach (glob('inc/*.php') as $file) {
 foreach (glob('lib/*.php') as $file) {
     require_once $file;
 }
-foreach (glob('mvc/*.mod.php') as $file) {
+foreach (glob('mc/*.mod.php') as $file) {
     require_once $file;
 }
 
 switch($x['url']){
     case 'lista-cani':
-        require_once 'mvc/cani.ctrl.php';
+        require_once 'mc/cani.ctrl.php';
         break;
     case 'lista-padroni':
-        require_once 'mvc/padroni.ctrl.php';
+        require_once 'mc/padroni.ctrl.php';
         break;
     case 'index':
         default:

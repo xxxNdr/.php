@@ -1,0 +1,23 @@
+{% import "navigation.twig" as nav %}
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		{% block head %}
+			<title>Esercizio per 15/9/2025</title>
+		{% endblock %}
+		<link rel="stylesheet" href="s.css">
+	</head>
+	<body>
+		<header>
+			{% block header %}
+				<nav>{{nav.nav(menu)}}</nav>
+			{% endblock %}
+		</header>
+		<main>
+			{% block main %}{% endblock %}
+		</main>
+	</body>
+</html>

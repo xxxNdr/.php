@@ -23,9 +23,6 @@ insert into pagine (nome, contenuto) values
 ('lista-padroni', '{"titolo":"lista-padroni","h1":"Lista Padroni","menu":[]}'),
 ('lista-cani', '{"titolo":"lista-cani","h1":"Lista Cani"}');
 
-update pagine
-set contenuto = JSON_SET(contenuto, '$.template','persone.twig')
-where nome = 'lista-persone' and id > 0;
 
 update pagine
 set contenuto = json_set(contenuto, '$.template', 'cani.twig')
@@ -46,14 +43,6 @@ update pagine set template = json_unquote(json_extract(contenuto, '$.template'))
 update pagine set contenuto = json_remove(contenuto, '$.template') where id > 0;
 
 update pagine set contenuto = json_set(contenuto, '$.titolo', 'lista-padroni') where id = 1;
-update pagine set contenuto = json_set(contenuto, '$.titolo', 'lista-padroni') where id = 1;
-
-select *
-from pagine;
-
-select * from persone;
-select * from cani;
-describe cani;
 
 SELECT contenuto FROM pagine WHERE id = 1;
 
@@ -65,3 +54,23 @@ update pagine set template = 'padroni.twig'
 where id = 1;
 
 update pagine set contenuto = json_remove(contenuto, '$.template') where id = 1;
+
+create table padroni_cani(
+id int auto_increment primary key,
+padrone_id int not null,
+cane_id int not null,
+foreign key (padrone_id) references persone(id),
+foreign key (cane_id) references cani(id)
+);
+/*
+questa tabella memorizza le associazioni tra padrone e cane
+*/
+
+set sql_safe_updates = 0;
+delete from persone;
+delete from cani;
+set sql_safe_updates = 1;
+
+select * from cani;
+select * from persone;
+select * from pagine;
