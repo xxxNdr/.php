@@ -1,0 +1,13 @@
+{
+    "name": "xxxndr/articoli",
+    "description": "occhielli di Limes",
+    "config": {
+        "vendor-dir": "vendor",
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "require": {
+        "twig/twig": "*",
+        "monolog/monolog": "^3.0"
+    }
+}

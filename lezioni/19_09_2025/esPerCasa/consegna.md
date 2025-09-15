@@ -1,0 +1,2 @@
+esercizio 16
+Scrivere un programma che consenta di inserire dei brevi articoli di testo (scrivere solo i titoli e utilizzare lorem ipsum per il testo) organizzati per argomento, lunghezza e autore. Proporre l'impaginazione di una rivista in modo tale che la lunghezza complessiva degli articoli sia fra le 10.000 e le 11.000 battute, che non ci siano più di due articoli sullo stesso argomento, e che non ci sia più di un articolo per autore.
