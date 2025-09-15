@@ -74,3 +74,4 @@ set sql_safe_updates = 1;
 select * from cani;
 select * from persone;
 select * from pagine;
+select * from padroni_cani;
