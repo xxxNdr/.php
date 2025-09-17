@@ -11,8 +11,5 @@ old/
 08_09_2025/
 08_09_2025.strange/
 
-19_09_2025/*
-!19_09_2025/esPerCasa/
-!19_09_2025/esPerCasa/**
-19_09_2025/esPerCasa/vendor/
 
+**/vendor/

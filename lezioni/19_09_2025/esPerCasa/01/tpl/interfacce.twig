@@ -1,0 +1,64 @@
+<h3>Interfacce</h3>
+
+<section>
+  <h4>La Gerarchia degli Iteratori in PHP</h4>
+  <p>
+    La relazione tra IteratorAggregate, Traversable e ArrayIterator in PHP segue questa gerarchia:
+  </p>
+</section>
+
+<section>
+  <h4>Le Interfacce Fondamentali</h4>
+  <ul>
+    <li>
+      <strong>Traversable</strong>: Interfaccia base speciale (nativa del motore PHP) che indica che un oggetto può essere iterato con foreach. Non può essere implementata direttamente da classi utente, ma serve come base per altre interfacce di iterazione.
+    </li>
+    <li>
+      <strong>Iterator</strong>: Estende Traversable e richiede l'implementazione di cinque metodi (rewind, current, key, next, valid).
+    </li>
+    <li>
+      <strong>IteratorAggregate</strong>: Estende Traversable e richiede solo il metodo getIterator(), offrendo un approccio più semplice.
+    </li>
+  </ul>
+</section>
+
+<section>
+  <h4>L'Implementazione Concreta</h4>
+  <p>
+    ArrayIterator è una classe concreta che implementa Iterator e permette di iterare su array o strutture dati simili.
+  </p>
+</section>
+
+<section>
+  <h4>Funzionamento Pratico</h4>
+  <ol>
+    <li>La classe AlbumCollection implementa IteratorAggregate</li>
+    <li>Deve quindi fornire il metodo getIterator()</li>
+    <li>getIterator() restituisce un nuovo ArrayIterator basato sull'array interno $lista</li>
+    <li>ArrayIterator implementa Iterator, che estende Traversable</li>
+  </ol>
+</section>
+
+<section>
+  <h4>Schema della Gerarchia</h4>
+  <pre>
+Traversable (interfaccia base)
+├── IteratorAggregate (interfaccia)
+│   └── Classi come AlbumCollection
+└── Iterator (interfaccia)
+    └── ArrayIterator (implementazione concreta)
+  </pre>
+</section>
+
+<section>
+  <h4>Riassunto</h4>
+  <p>
+    AlbumCollection → Implementa IteratorAggregate → Restituisce ArrayIterator → Che è Iterator (quindi Traversable)
+  </p>
+  <p>
+    Questo meccanismo consente l'iterazione con foreach senza dover implementare tutti i metodi di Iterator, delegando il lavoro a un iteratore esterno (ArrayIterator).
+  </p>
+  <p>
+    Non si tratta di "contenimento" ma di collaborazione: IteratorAggregate dice "ti fornisco un iteratore esterno" e ArrayIterator è l'implementazione concreta che può essere restituita per iterare su un array.
+  </p>
+</section>
