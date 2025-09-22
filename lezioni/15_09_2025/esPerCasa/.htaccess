@@ -1,2 +1,0 @@
-RewriteEngine on
-RewriteRule ^(.+)\.(php|html)$ index.php?x=$1 [L,QSA,NC,NE]
