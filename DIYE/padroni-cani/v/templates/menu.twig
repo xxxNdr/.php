@@ -1,0 +1,9 @@
+{% macro menu(menu) %}
+	<ul>
+		{% for k, v in menu %}
+			<li>
+				<a href="?x={{k}}">{{v.contenuto.h1}}</a>
+			</li>
+		{% endfor %}
+	</ul>
+{% endmacro %}

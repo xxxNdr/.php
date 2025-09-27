@@ -1,0 +1,5 @@
+RewriteEngine on
+RewriteRule ^([^.]+)(\.(html|php))?$ index.php?x=$1 [L,QSA]
+
+# ([^.]+) = cattura caratteri senza punto
+# (\.(html|php))? = 0 oppure 1 occorrenza di url con estensione file
