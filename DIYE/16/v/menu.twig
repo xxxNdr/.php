@@ -1,0 +1,9 @@
+{% macro menu(pagine) %}
+	<ul>
+		{% for x in pagine %}
+			<li>
+				<a href="?x={{x.nome}}">{{x.nome|upper}}</a>
+			</li>
+		{% endfor %}
+	</ul>
+{% endmacro %}

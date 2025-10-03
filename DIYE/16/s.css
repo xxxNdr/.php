@@ -1,0 +1,92 @@
+@import url("https://fonts.googleapis.com/css2?family=Barrio&family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+body,
+main,
+nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+li {
+  display: inline-block;
+  padding: 20px 50px;
+}
+
+a {
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 1.5em;
+}
+
+a:hover {
+  background-color: #ffd15b;
+  border-radius: 20px;
+  padding: 0px 20px;
+  color: #000000;
+}
+
+body {
+  font-family: "Google Sans Code", monospace;
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-style: normal;
+  overflow-x: hidden;
+}
+
+article p {
+  font-size: 18px;
+  max-width: 700px;
+  text-align: justify;
+  margin: 20px auto;
+  line-height: 1.8;
+  text-shadow: 1px 1px 1px #000000;
+  background-color: #f5f5dc50;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 5em;
+  text-shadow: 2px 2px 2px #000000;
+}
+
+h2 {
+  font-size: 3em;
+  text-align: center;
+  text-shadow: 2px 2px 2px #000000;
+}
+
+body {
+  background: radial-gradient(
+      circle at 10% 90%,
+      #000031,
+      rgba(7, 0, 37, 0.8) 20%,
+      rgba(0, 0, 0, 0.2) 80%
+    ),
+    url(img/D.png);
+  background-blend-mode: darken;
+  min-height: 100vh;
+  color: #ffffff;
+}
+
+#T {
+  font-size: 800px;
+  position: absolute;
+  left: 2000px;
+  top: -10%;
+  transform: translateX(-50%);
+  margin: 0;
+  z-index: 1;
+  filter: url(#blur);
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+}
+
+#data{
+  margin:0px auto;
+}

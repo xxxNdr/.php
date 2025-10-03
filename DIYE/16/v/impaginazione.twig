@@ -1,0 +1,11 @@
+{% extends "index.twig" %}
+	{% block title %}{% endblock %}
+	{% block articles %}
+		{% for a in articoli %}
+			<article>
+				<h2>{{a.titolo}}</h2>
+				<p id="data">{{a.data_inserimento|format_datetime(locale='it', dateFormat='full', timeFormat='short')}}</p>
+				<p>{{a.contenuto}}</p>
+			</article>
+		{% endfor %}
+	{% endblock %}
