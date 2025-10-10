@@ -1,7 +1,5 @@
 # Istruzioni Installazione Progetto
 
-## 📋 PROCEDURA COMPLETA
-
 # 1. Clona il progetto
 
 git clone [url-del-repository]
