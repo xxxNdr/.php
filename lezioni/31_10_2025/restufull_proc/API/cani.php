@@ -114,18 +114,42 @@ switch ($method) {
 
         break;
 
-    // case 'PATCH':
-    //     $input = json_decode(file_get_contents('php://input'), true);
-    //     if(!empty($input['id'])){
-    //         $id = intval($input['id']);
-    //         if(!empty($input['nome'])){
-    //             $nome = trim(($input['nome']));
-    //             $stmt = ($conn, "UPDATE ")
-    //         }
-    //         if(!empty($input['data_nascita'])){
-    //             $data_nascita = trim($input['data_nascita']);
-    //         }
-    //     }
+    case 'PATCH':
+        $input = json_decode(file_get_contents('php://input'), true);
+        if (!empty($input['id'])) {
+            $id = intval($input['id']);
+            if (!empty($input['nome']) && !empty($input['data_nascita'])) {
+                $nome = trim(($input['nome']));
+                $data_nascita = trim($input['data_nascita']);
+                $stmt = mysqli_prepare($conn, "UPDATE cani SET nome = ?, data_nascita =? WHERE id = ?");
+
+                if (!$stmt) {
+                    $message = [
+                        'errore' => 'Errore nella preparazione della query UPDATE: ' . mysqli_error($conn)
+                    ];
+                } else {
+                    mysqli_stmt_bind_param($stmt, 'ssi', $nome, $data_nascita, $id);
+                    $res = mysqli_stmt_execute($stmt);
+
+                    if ($res) {
+                        $message = [
+                            'successo' => "$nome modificato correttamente"
+                        ];
+                    } else {
+                        $message = [
+                            'errore' => "$nome non è stato modificato. Errore: " . mysqli_error($conn)
+                        ];
+                    }
+                    mysqli_stmt_close($stmt);
+                }
+            }
+        } else {
+            $message = [
+                'errore' => "Il campo id è obbligatorio"
+            ];
+        }
+
+        break;
 
     case 'DELETE':
 

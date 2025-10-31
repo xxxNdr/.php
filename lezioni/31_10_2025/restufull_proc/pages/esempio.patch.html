@@ -9,6 +9,9 @@
     <h1>Esempio di richiesta PATCH</h1>
     <fieldset>
       <legend>modifica cane</legend>
+      <label for="id">ID:</label>
+      <input type="text" id="id" name="id" required />
+      <br /><br />
       <label for="nome">Nome:</label>
       <input type="text" id="nome" name="nome" required />
       <br /><br />
@@ -21,6 +24,7 @@
   <script>
     function modificaCane() {
       const data = {
+        id: parseInt(document.getElementById("id").value),
         nome: document.getElementById("nome").value,
         data_nascita: document.getElementById("data_nascita").value,
       };
