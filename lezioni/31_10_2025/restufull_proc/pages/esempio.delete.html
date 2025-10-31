@@ -17,7 +17,7 @@
 </body>
 <script>
     function cancellaCane( id ) {
-        fetch( '/lezioni/lezione.18.01/api/cani/' + id, {
+        fetch( '../API/cani.php/' + encodeURIComponent(id), {
             method: 'DELETE'
         })
         .then( response => response.json() )

@@ -152,9 +152,33 @@ switch ($method) {
         break;
 
     case 'DELETE':
+        // ottieni id da URL
+        $request = explode('/', trim($_SERVER['REQUEST_URI'], '/'));
+        $last = end($request);
+        $id = intval($last);
+        // $input = json_decode(file_get_contents('php://input'), true);
+        if (isset($id)) {
+            $stmt = mysqli_prepare($conn, "DELETE FROM cani WHERE id = ?");
+            if (!$stmt) {
+                $message = [
+                    'errore' => 'Errore nella preparazione della query DELETE: ' . mysqli_error($conn)
+                ];
+            } else {
+                mysqli_stmt_bind_param($stmt, 'i', $id);
+                $res = mysqli_stmt_execute($stmt);
 
-        // implementare
-        $message = ["metodo" => "DELETE"];
+                if ($res) {
+                    $message = [
+                        'successo' => "Cane con id $id eliminato con successo"
+                    ];
+                } else {
+                    $message = [
+                        'errore' => "Cane con id $id non eliminato"
+                    ];
+                }
+                mysqli_stmt_close($stmt);
+            }
+        }
 
         break;
 
