@@ -1,47 +1,44 @@
 <!DOCTYPE html>
 <html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Esempio GET</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Esempio di richiesta PATCH</h1>
     <fieldset>
-        <legend>modifica cane</legend>
-        <label for="id">ID:</label>
-        <input type="text" id="id" name="id" required>
-        <br><br>
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" required>
-        <br><br>
-        <label for="data_nascita">Data di nascita:</label>
-        <input type="date" id="data_nascita" name="data_nascita" required>
-        <br><br>
-        <input type="button" value="Invia" onclick="modificaCane( document.getElementById('id').value );">
+      <legend>modifica cane</legend>
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" name="nome" required />
+      <br /><br />
+      <label for="data_nascita">Data di nascita:</label>
+      <input type="date" id="data_nascita" name="data_nascita" required />
+      <br /><br />
+      <input type="button" value="Invia" onclick="modificaCane();" />
     </fieldset>
-</body>
-<script>
-    function modificaCane( id ) {
-        const data = {
-            nome: document.getElementById('nome').value,
-            data_nascita: document.getElementById('data_nascita').value
-        };
+  </body>
+  <script>
+    function modificaCane() {
+      const data = {
+        nome: document.getElementById("nome").value,
+        data_nascita: document.getElementById("data_nascita").value,
+      };
 
-        fetch( '/lezioni/lezione.18.01/api/cani/' + id, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify( data )
+      fetch("../API/cani.php", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          alert("Risposta: " + JSON.stringify(data));
         })
-        .then( response => response.json() )
-        .then( data => {
-            alert( 'Risposta: ' + JSON.stringify( data ) );
-        })
-        .catch( error => {
-            console.error( 'Errore:', error );
+        .catch((error) => {
+          console.error("Errore:", error);
         });
     }
-</script>
+  </script>
 </html>

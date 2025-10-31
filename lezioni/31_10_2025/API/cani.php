@@ -82,10 +82,52 @@ switch ($method) {
 
     case 'PUT':
 
-        // implementare
-        $message = ["metodo" => "PUT"];
+        // prendo id dall'URL
+        $request = explode('/', trim($_SERVER['REQUEST_URI'], '/'));
+        $id = intval(end($request)); // ultimo pezzo dell'URL
+
+        // decodifico
+        $input = json_decode(file_get_contents('php://input'), true);
+
+        if ($id > 0 && !empty($input['nome']) && !empty($input['data_nascita'])) {
+            $nome = trim($input['nome']);
+            $data_nascita = trim($input['data_nascita']);
+
+            // preparo REPLACE
+            $stmt = mysqli_prepare($conn, "REPLACE INTO cani (id, nome, data_nascita) VALUES (?,?,?)");
+            if (!$stmt) {
+                $message = ['errore' => 'Errore nella preparazione della query REPLACE: ' . mysqli_error($conn)];
+            } else {
+                mysqli_stmt_bind_param($stmt, 'iss', $id, $nome, $data_nascita);
+                $res = mysqli_stmt_execute($stmt);
+
+                if ($res) {
+                    $message = [
+                        'successo' => "$nome rimpiazzato correttamente"
+                    ];
+                } else {
+                    $message = [
+                        'errore' => "$nome non è stato rimpiazzato. Errore: " . mysqli_stmt_errno($stmt)
+                    ];
+                }
+                mysqli_stmt_close($stmt);
+            }
+        }
 
         break;
+
+    case 'PATCH':
+        $input = json_decode(file_get_contents('php://input'), true);
+        if(!empty($input['id'])){
+            $id = intval($input['id']);
+            if(!empty($input['nome'])){
+                $nome = trim(($input['nome']));
+                $stmt = ($conn, "UPDATE ")
+            }
+            if(!empty($input['data_nascita'])){
+                $data_nascita = trim($input['data_nascita']);
+            }
+        }
 
     case 'DELETE':
 
